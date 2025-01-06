@@ -12,7 +12,7 @@ const ContactUs = () => {
                             <p>Якщо ви зацікавлені у співпраці з нами, ми будемо раді обговорити можливості для взаємодії.</p>
                         </div>
                         <div className={styles.contactUsImage} data-aos="fade-in" data-aos-offset="100" data-aos-duration="500">
-                            <Image src="" alt="" width={232} height={232} />
+                            <Image src="/images/contact-us-photo.png" alt="" width={232} height={232} />
                         </div>
                     </div>
                     <div className={styles.contactUsPart2}>
@@ -30,7 +30,7 @@ const ContactUs = () => {
                         <div className={styles.contactUsRight} data-aos="zoom-in" data-aos-offset="100" data-aos-duration="500">
                             <div className={styles.contactUsItem} data-aos="zoom-in">
                                 <div className={styles.contactUsItemImage}>
-                                    <Image src="" alt="" width={25} height={25} />
+                                    <Image src="/images/contact-us-photo1.svg" alt="" width={25} height={25} />
                                 </div>
                                 <div>
                                     <h6>Наша адреса</h6>
@@ -39,7 +39,7 @@ const ContactUs = () => {
                             </div>
                             <div className={styles.contactUsItem} data-aos="zoom-in">
                                 <div className={styles.contactUsItemImage}>
-                                    <Image src="" alt="" width={25} height={25} />
+                                    <Image src="/images/contact-us-photo2.svg" alt="" width={25} height={25} />
                                 </div>
                                 <div>
                                     <h6>Телефони</h6>
@@ -49,7 +49,7 @@ const ContactUs = () => {
                             </div>
                             <div className={styles.contactUsItem} data-aos="zoom-in">
                                 <div className={styles.contactUsItemImage}>
-                                    <Image src="" alt="" width={25} height={25} />
+                                    <Image src="/images/contact-us-photo3.svg" alt="" width={25} height={25} />
                                 </div>
                                 <div>
                                     <h6>Робочі години</h6>
@@ -59,7 +59,7 @@ const ContactUs = () => {
                             </div>
                             <div className={styles.contactUsItem} data-aos="zoom-in">
                                 <div className={styles.contactUsItemImage}>
-                                    <Image src="" alt="" width={25} height={25} />
+                                    <Image src="/images/contact-us-photo4.svg" alt="" width={25} height={25} />
                                 </div>
                                 <div>
                                     <h6>Електронна пошта</h6>

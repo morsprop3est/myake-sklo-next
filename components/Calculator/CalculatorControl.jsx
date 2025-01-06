@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Calculator.module.scss';
 
 const CalculatorControl = ({ tableDimensions, setTableDimensions, shape, setShape, glassType, setGlassType }) => {
@@ -11,7 +11,6 @@ const CalculatorControl = ({ tableDimensions, setTableDimensions, shape, setShap
 
     return (
         <div className={styles.calculatorControl}>
-            {/* Shape Selection */}
             <div className={styles.calculatorHeader}>
                 <h6>Форма столу</h6>
             </div>
@@ -29,7 +28,7 @@ const CalculatorControl = ({ tableDimensions, setTableDimensions, shape, setShap
                         <label htmlFor={`shape-${option}`}>
                             <span className={styles.shapeRadio}>
                                 <img
-                                    src={`catalog/view/theme/myakesklo/assets/images/${option}.svg`}
+                                    src={`/images/photo1.svg`}
                                     alt={option}
                                 />
                             </span>
@@ -38,7 +37,6 @@ const CalculatorControl = ({ tableDimensions, setTableDimensions, shape, setShap
                 ))}
             </div>
 
-            {/* Glass Type */}
             <div className={styles.calculatorHeader}>
                 <h6>Тип скла</h6>
             </div>
@@ -60,7 +58,6 @@ const CalculatorControl = ({ tableDimensions, setTableDimensions, shape, setShap
                 ))}
             </div>
 
-            {/* Dimensions */}
             <div className={styles.calculatorHeader}>
                 <h6>Розмір столу</h6>
             </div>
@@ -97,13 +94,11 @@ const CalculatorControl = ({ tableDimensions, setTableDimensions, shape, setShap
                 ))}
             </div>
 
-            {/* Price */}
             <h4 className={styles.oldPrice} style={{ textDecoration: 'line-through' }}>
                 Ціна: 299
             </h4>
             <h3 className={styles.newPrice}>Ціна: 199</h3>
 
-            {/* Add to Cart */}
             <button
                 className={styles.mainButton}
                 onClick={() => alert('Додано в кошик')}

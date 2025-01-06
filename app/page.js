@@ -8,7 +8,7 @@ import WhyUs from '@/components/WhyUs/WhyUs';
 import WhatWeOffer from '@/components/WhatWeOffer/WhatWeOffer';
 import FastBuy from '@/components/FastBuy/FastBuy';
 import ContactUs from '@/components/ContactUs/ContactUs';
-
+import Reviews from '@/components/Reviews/Reviews';
 
 import styles from "./page.module.scss";
 
@@ -19,8 +19,11 @@ export default function Home() {
         <Main/>
         <WhyUs/>
         <WhatWeOffer/>
+        <Calculator/>
         <FastBuy/>
         <ContactUs/>
+        <Reviews/>
+        <Footer/>
     </div>
   );
 }

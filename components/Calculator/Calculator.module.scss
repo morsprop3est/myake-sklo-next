@@ -16,13 +16,18 @@
 
     p#calculator {
       font-size: 16px;
-      color: #f00; // Red warning text
+      color: #f00;
     }
   }
 
   .calculatorWrapper {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+  }
+
+  .photoGridWrapper {
+    display: flex;
     align-items: flex-start;
 
     .menu {
@@ -34,32 +39,85 @@
       .menuBtn {
         width: 75px;
         height: 75px;
+        background-color: transparent;
+        border: none;
 
         img {
-          width: 100%;
-          height: 100%;
+          width: 75px;
+          height: 75px;
           object-fit: cover;
+          border-radius: 2px;
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         }
       }
     }
 
     .displayArea {
       width: 500px;
+      height: 500px;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
-      .gridDisplay {
+      .gridDisplayWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
         width: 100%;
-        height: auto;
+        height: 100%;
+        padding: 20px;
 
-        svg {
+        .tableShape {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          transition: all 0.3s ease;
+          border: 1px solid black;
+        }
+
+        .tableShape.glossy {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tableShape.ribbed {
+          background-image: radial-gradient(#999999 1px, transparent 1px), radial-gradient(#000000 1px, transparent 1px);
+          background-size: 4px 4px;
+          background-position: 0 0, 2px 2px;
+          background-color: transparent;
+        }
+
+        .tableShape.black {
+          background: rgba(0, 0, 0, 0.5);
+        }
+
+        .gridDisplay {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
+          display: block;
+          pointer-events: none;
+        }
 
-          rect {
-            fill: none;
-            stroke: #000;
-            ry: 25px;
-          }
+        .gridLine {
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.2);
+          z-index: 1;
+        }
+
+        .horizontal {
+          width: 100%;
+          height: 1px;
+        }
+
+        .vertical {
+          height: 100%;
+          width: 1px;
         }
       }
 
@@ -75,7 +133,6 @@
     }
 
     .calculatorControl {
-      width: 300px;
       padding: 20px;
       background-color: #f9f9f9;
       border-radius: 8px;
@@ -148,7 +205,7 @@
       .newPrice {
         font-size: 22px;
         font-weight: bold;
-        color: #00b300; // Green for new price
+        color: #00b300;
       }
 
       .mainButton {

@@ -6,25 +6,16 @@ const WhatWeOffer = () => {
     return (
         <section className={styles.whatWeOffer} id="about-us">
             <div className={styles.container}>
-                <div className={styles.whatWeOfferHeader}
-                     data-aos="zoom-in"
-                     data-aos-offset="100"
-                     data-aos-duration="500">
+                <div className={styles.whatWeOfferHeader}>
                     Що ми пропонуємо?
                 </div>
-                <div className={styles.whatWeOfferText}
-                     data-aos="zoom-in"
-                     data-aos-offset="100"
-                     data-aos-duration="500">
+                <div className={styles.whatWeOfferText}>
                     Ми пропонуємо м’яке скло найвищої якості, яке ефективно захищає меблі від подряпин, плям, вологи та
                     впливу високих температур, зберігаючи їх первинний вигляд і продовжуючи термін служби.
                 </div>
                 <div className={styles.whatWeOfferItemWrapper}>
                     <div className={styles.whatWeOfferItem}>
-                        <div className={styles.whatWeOfferVerticalItem}
-                             data-aos="zoom-in"
-                             data-aos-offset="100"
-                             data-aos-duration="500">
+                        <div className={styles.whatWeOfferVerticalItem}>
                             <Image
                                 src="/images/what-we-offer-photo1.svg"
                                 alt="Logo"
@@ -39,10 +30,7 @@ const WhatWeOffer = () => {
                             </ul>
                         </div>
 
-                        <div className={styles.whatWeOfferVerticalItem}
-                             data-aos="zoom-in"
-                             data-aos-offset="100"
-                             data-aos-duration="500">
+                        <div className={styles.whatWeOfferVerticalItem}>
                             <Image
                                 src="/images/what-we-offer-photo2.svg"
                                 alt="Logo"
@@ -56,10 +44,7 @@ const WhatWeOffer = () => {
                         </div>
                     </div>
 
-                    <div className={`${styles.whatWeOfferItem} ${styles.whatWeOfferItem1Order}`}
-                         data-aos="zoom-in"
-                         data-aos-offset="100"
-                         data-aos-duration="500">
+                    <div className={`${styles.whatWeOfferItem} ${styles.whatWeOfferItem1Order}`}>
                         <Image
                             src="/images/what-we-offer-main-photo.png"
                             alt="logo"
@@ -70,10 +55,7 @@ const WhatWeOffer = () => {
                     </div>
 
                     <div className={styles.whatWeOfferItem}>
-                        <div className={styles.whatWeOfferVerticalItem}
-                             data-aos="zoom-in"
-                             data-aos-offset="100"
-                             data-aos-duration="500">
+                        <div className={styles.whatWeOfferVerticalItem}>
                             <Image
                                 src="/images/what-we-offer-photo3.svg"
                                 alt="Logo"
@@ -87,10 +69,7 @@ const WhatWeOffer = () => {
                             </ul>
                         </div>
 
-                        <div className={styles.whatWeOfferVerticalItem}
-                             data-aos="zoom-in"
-                             data-aos-offset="100"
-                             data-aos-duration="500">
+                        <div className={styles.whatWeOfferVerticalItem}>
                             <Image
                                 src="/images/what-we-offer-photo4.svg"
                                 alt="Logo"

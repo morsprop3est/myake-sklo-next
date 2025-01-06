@@ -1,14 +1,50 @@
 import React from 'react';
 import styles from './Calculator.module.scss';
 
-const PhotoGrid = () => {
+const PhotoGrid = ({ tableDimensions, glassType }) => {
+    const { width, height, radius } = tableDimensions;
+
+    const shapeStyles = {
+        width: `${width}px`,
+        height: `${height}px`,
+        borderRadius: `${radius}px`,
+    };
+
+    const generateGrid = () => {
+        const rows = 20;
+        const columns = 20;
+        const gridItems = [];
+
+        for (let i = 0; i < rows; i++) {
+            gridItems.push(
+                <div
+                    key={`h-${i}`}
+                    className={`${styles.gridLine} ${styles.horizontal}`}
+                    style={{ top: `${(i * 100) / (rows - 1)}%` }}
+                />
+            );
+        }
+
+        for (let i = 0; i < columns; i++) {
+            gridItems.push(
+                <div
+                    key={`v-${i}`}
+                    className={`${styles.gridLine} ${styles.vertical}`}
+                    style={{ left: `${(i * 100) / (columns - 1)}%` }}
+                />
+            );
+        }
+
+        return gridItems;
+    };
+
     return (
-        <div className={styles.calculatorWrapper}>
+        <div className={styles.photoGridWrapper}>
             <div className={styles.menu} data-aos="zoom-in">
-                {['calculator', 'photo1', 'photo2', 'photo3', 'photo4'].map((type, index) => (
+                {['icon', 'photo1', 'photo2', 'photo3', 'photo4'].map((type, index) => (
                     <button className={styles.menuBtn} data-type={type} key={index}>
                         <img
-                            src={`catalog/view/theme/myakesklo/assets/images/calculator-${type}.jpg`}
+                            src={`/images/calculator-${type}.jpg`}
                             alt={`Фото ${index + 1}`}
                             data-aos="zoom-in"
                         />
@@ -17,19 +53,16 @@ const PhotoGrid = () => {
             </div>
 
             <div className={styles.displayArea} data-aos="zoom-in" data-aos-offset="100" data-aos-duration="500">
-                <div className={styles.gridDisplay}>
-                    <svg width="100%" height="100%" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <rect id="table-rect" width="200" height="100" fill="none" stroke="#000" ry="25" />
-                    </svg>
-                    <div id="grid"></div>
-                </div>
+                <div className={styles.gridDisplayWrapper}>
+                    <div
+                        className={`${styles.tableShape} ${styles[glassType]}`}
+                        style={shapeStyles}
+                    >
+                    </div>
 
-                <div className={styles.photoDisplay} style={{ display: 'none' }}>
-                    <img
-                        src="catalog/view/theme/myakesklo/assets/images/calculator-icon.jpg"
-                        alt="Фото 1"
-                        className={styles.photo}
-                    />
+                    <div className={styles.gridDisplay}>
+                        {generateGrid()}
+                    </div>
                 </div>
             </div>
         </div>
