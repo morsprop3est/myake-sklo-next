@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Calculator.module.scss';
 
-const PhotoGrid = ({ tableDimensions, glassType }) => {
+const PhotoGrid = ({ tableDimensions, glassType, glassThickness }) => {
     const { width, height, radius } = tableDimensions;
 
     const shapeStyles = {
@@ -55,7 +55,7 @@ const PhotoGrid = ({ tableDimensions, glassType }) => {
             <div className={styles.displayArea} data-aos="zoom-in" data-aos-offset="100" data-aos-duration="500">
                 <div className={styles.gridDisplayWrapper}>
                     <div
-                        className={`${styles.tableShape} ${styles[glassType]}`}
+                        className={`${styles.tableShape} ${styles[glassType]} ${styles[glassThickness]}`}
                         style={shapeStyles}
                     >
                     </div>

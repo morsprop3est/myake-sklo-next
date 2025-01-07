@@ -22,8 +22,311 @@
 
   .calculatorWrapper {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    gap: 20px;
+
+    .calculatorControl {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 2px;
+      width: 100%;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+      p {
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #e1e1e1;
+        text-align: center;
+      }
+
+      .calculatorHeader {
+        width: 100%;
+
+        h6 {
+          font-weight: 500;
+          font-size: 16px;
+          margin: 10px 0;
+          padding-top: 20px;
+        }
+      }
+
+      .tableShape {
+        gap: 10px;
+      }
+
+      .calculatorItemWrapper {
+        width: 100%;
+      }
+
+      .priceWrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+      }
+
+      .tableShape,
+      .tableType,
+      .tableThickness {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+
+        .tableShapeItem,
+        .tableTypeItem,
+        .tableThicknessItem {
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          label {
+            display: flex;
+            height: 100%;
+            width: 100%;
+          }
+
+          input[type="radio"] {
+            display: none;
+          }
+
+          .shapeRadio {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            outline: 1px solid #e1e1e1;
+            cursor: pointer;
+
+            img {
+              width: 50px;
+              padding: 10px;
+            }
+
+            &:hover {
+              border-color: #888;
+            }
+          }
+
+          .disabled {
+            background-color: #d3d3d3;
+            pointer-events: none;
+            opacity: 0.6;
+          }
+
+          input[type="radio"] {
+            &:checked + label .shapeRadio {
+              border: 2px solid #e2ae53;
+            }
+          }
+
+        }
+      }
+
+      .tableSize {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 15px;
+        width: 100%;
+
+        .tableWidth,
+        .tableHeight {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          h6 {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+          }
+        }
+
+        .tableWidth,
+        .tableHeight,
+        .tableRadius {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          h6 {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+          }
+
+          input[type="number"] {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 2px;
+            font-size: 16px;
+            font-weight: 400;
+            width: 100%;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+
+            &:focus {
+              border-color: #ff6600;
+              outline: none;
+            }
+          }
+
+          input[type="range"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+            width: 100%;
+            border-radius: 2px;
+            outline: none;
+            transition: background 0.3s ease;
+
+
+            &:focus {
+              outline: none;
+            }
+
+            &::-webkit-slider-runnable-track{
+              height: 8px;
+              background: #e1e1e1;
+              border-radius: 5px;
+            }
+
+            &::-moz-range-track {
+              height: 8px;
+              background: #e1e1e1;
+              border-radius: 5px;
+            }
+
+            &::-ms-track {
+              height: 8px;
+              background: #e1e1e1;
+              border-radius: 5px;
+              border-color: transparent;
+              border-width: 0;
+            }
+
+            &::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              width: 20px;
+              height: 20px;
+              background: #d8af61;
+              border-radius: 50%;
+              border: 2px solid #fff;
+              cursor: pointer;
+              transition: background 0.3s ease;
+              position: relative;
+              top: -6px;
+            }
+
+            &::-moz-range-thumb {
+              width: 20px;
+              height: 20px;
+              background: #d8af61;
+              border-radius: 50%;
+              border: 2px solid #fff;
+              cursor: pointer;
+              transition: background 0.3s ease;
+              position: relative;
+              top: -6px;
+            }
+
+            &::-ms-thumb {
+              width: 20px;
+              height: 20px;
+              background: #d8af61;
+              border-radius: 50%;
+              border: 2px solid #fff;
+              cursor: pointer;
+              transition: background 0.3s ease;
+              position: relative;
+              top: -6px;
+            }
+
+            &:hover {
+              &::-webkit-slider-thumb {
+                background: #d8af61;
+              }
+
+              &::-moz-range-thumb {
+                background: #d8af61;
+              }
+
+              &::-ms-thumb {
+                background: #d8af61;
+              }
+            }
+          }
+
+        }
+
+        .tableRadius {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          h6 {
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+          }
+        }
+
+        .tableRadius {
+          grid-column: 1 / -1;
+        }
+      }
+
+
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .oldPrice {
+        font-size: 18px;
+        text-decoration: line-through;
+        color: #222831;
+        margin: 0 0 10px;
+      }
+
+      .newPrice {
+        font-size: 22px;
+        font-weight: bold;
+        color: #222831;
+        margin: 0 0 10px;
+      }
+
+      .mainButton {
+        width: 250px;
+        padding: 20px;
+        background-color: #e2ae53;
+        color: white;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: background-color 0.3s;
+        font-family: 'Montserrat Alternates', sans-serif;
+        font-weight: 400;
+        box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+
+
+        &:hover {
+          background-color: #c49748;
+        }
+      }
+    }
   }
 
   .photoGridWrapper {
@@ -33,12 +336,10 @@
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 20px;
       margin-right: 20px;
 
       .menuBtn {
-        width: 75px;
-        height: 75px;
         background-color: transparent;
         border: none;
 
@@ -54,7 +355,7 @@
 
     .displayArea {
       width: 500px;
-      height: 500px;
+      height: 100%;
       position: relative;
       display: flex;
       justify-content: center;
@@ -65,33 +366,42 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
         width: 100%;
         height: 100%;
-        padding: 20px;
+        border-radius: 2px;
 
         .tableShape {
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%) scale(2);
           transition: all 0.3s ease;
-          border: 1px solid black;
-        }
+          border: 1px solid #222831;
+          background: rgba(131,162,255,0.49);
 
-        .tableShape.glossy {
-          background: rgba(255, 255, 255, 0.1);
-        }
 
-        .tableShape.ribbed {
-          background-image: radial-gradient(#999999 1px, transparent 1px), radial-gradient(#000000 1px, transparent 1px);
-          background-size: 4px 4px;
-          background-position: 0 0, 2px 2px;
-          background-color: transparent;
-        }
+          &.thin {
+            border-bottom: 2px solid #222831;
+          }
 
-        .tableShape.black {
-          background: rgba(0, 0, 0, 0.5);
+          &.thick {
+            border-bottom: 4px solid #222831;
+          }
+
+          &.glossy {
+            background: rgba(131,162,255,0.49);
+          }
+
+          &.ribbed {
+            background-image: radial-gradient(#7e7e7e 1px, transparent 1px), radial-gradient(#7e7e7e 1px, transparent 1px);
+            background-size: 4px 4px;
+            background-position: 0 0, 2px 2px;
+            background-color: rgba(131,162,255,0.49);
+          }
+
+          &.black {
+            background: rgba(0, 0, 0, 0.5);
+          }
         }
 
         .gridDisplay {
@@ -128,99 +438,6 @@
           width: 100%;
           height: auto;
           object-fit: cover;
-        }
-      }
-    }
-
-    .calculatorControl {
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-
-      .calculatorHeader {
-        h6 {
-          font-weight: bold;
-          font-size: 18px;
-        }
-      }
-
-      .tableShape,
-      .tableType,
-      .tableThickness {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 20px;
-
-        .tableShapeItem,
-        .tableTypeItem,
-        .tableThicknessItem {
-          display: flex;
-          align-items: center;
-
-          input[type="radio"] {
-            margin-right: 10px;
-          }
-
-          label {
-            display: flex;
-            align-items: center;
-          }
-        }
-      }
-
-      .tableSize {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-
-        .tableWidth,
-        .tableHeight,
-        .tableRadius {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-
-          h6 {
-            font-size: 16px;
-          }
-
-          input[type="number"],
-          input[type="range"] {
-            width: 100%;
-          }
-        }
-      }
-
-      p {
-        font-size: 14px;
-        color: #666;
-      }
-
-      .oldPrice {
-        font-size: 18px;
-        text-decoration: line-through;
-        color: #999;
-      }
-
-      .newPrice {
-        font-size: 22px;
-        font-weight: bold;
-        color: #00b300;
-      }
-
-      .mainButton {
-        width: 100%;
-        padding: 12px;
-        background-color: #ff6600;
-        color: white;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: background-color 0.3s;
-
-        &:hover {
-          background-color: #e65c00;
         }
       }
     }

@@ -14,6 +14,7 @@ const Calculator = () => {
     });
 
     const [glassType, setGlassType] = useState('glossy');
+    const [glassThickness, setThickness] = useState('thin');
     const [shape, setShape] = useState('rectangle');
 
     return (
@@ -24,6 +25,7 @@ const Calculator = () => {
                     <PhotoGrid
                         tableDimensions={tableDimensions}
                         glassType={glassType}
+                        glassThickness={glassThickness}
                     />
                     <CalculatorControl
                         tableDimensions={tableDimensions}
@@ -32,6 +34,8 @@ const Calculator = () => {
                         setShape={setShape}
                         glassType={glassType}
                         setGlassType={setGlassType}
+                        glassThickness={glassThickness}
+                        setThickness={setThickness}
                     />
                 </div>
             </div>

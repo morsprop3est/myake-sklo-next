@@ -1,110 +1,42 @@
 import React from 'react';
 import styles from './Calculator.module.scss';
+import TableShape from './CalculatorControlСomponents/TableShape';
+import GlassType from './CalculatorControlСomponents/GlassType';
+import GlassThickness from './CalculatorControlСomponents/GlassThickness';
+import TableDimensions from './CalculatorControlСomponents/TableDimensions';
+import PriceDisplay from './CalculatorControlСomponents/PriceDisplay';
+import Link from "next/link";
 
-const CalculatorControl = ({ tableDimensions, setTableDimensions, shape, setShape, glassType, setGlassType }) => {
-    const handleDimensionChange = (type, value) => {
-        setTableDimensions((prev) => ({
-            ...prev,
-            [type]: value,
-        }));
-    };
-
+const CalculatorControl = ({
+                               tableDimensions,
+                               setTableDimensions,
+                               shape,
+                               setShape,
+                               glassType,
+                               setGlassType,
+                               glassThickness,
+                               setThickness,
+                           }) => {
     return (
         <div className={styles.calculatorControl}>
-            <div className={styles.calculatorHeader}>
-                <h6>Форма столу</h6>
-            </div>
-            <div className={styles.tableShape}>
-                {['rectangle', 'round', 'oval', 'rounded'].map((option) => (
-                    <div className={styles.tableShapeItem} key={option}>
-                        <input
-                            type="radio"
-                            name="shape"
-                            value={option}
-                            id={`shape-${option}`}
-                            checked={shape === option}
-                            onChange={() => setShape(option)}
-                        />
-                        <label htmlFor={`shape-${option}`}>
-                            <span className={styles.shapeRadio}>
-                                <img
-                                    src={`/images/photo1.svg`}
-                                    alt={option}
-                                />
-                            </span>
-                        </label>
-                    </div>
-                ))}
-            </div>
-
-            <div className={styles.calculatorHeader}>
-                <h6>Тип скла</h6>
-            </div>
-            <div className={styles.tableType}>
-                {['glossy', 'ribbed', 'black'].map((type) => (
-                    <div className={styles.tableTypeItem} key={type}>
-                        <input
-                            type="radio"
-                            name="glassType"
-                            value={type}
-                            id={`glass-${type}`}
-                            checked={glassType === type}
-                            onChange={() => setGlassType(type)}
-                        />
-                        <label htmlFor={`glass-${type}`}>
-                            <span className={styles.shapeRadio}>{type}</span>
-                        </label>
-                    </div>
-                ))}
-            </div>
-
-            <div className={styles.calculatorHeader}>
-                <h6>Розмір столу</h6>
-            </div>
-            <div className={styles.tableSize}>
-                {['width', 'height', 'radius'].map((dimension) => (
-                    <div
-                        className={styles[`table${dimension.charAt(0).toUpperCase() + dimension.slice(1)}`]}
-                        key={dimension}
-                    >
-                        <h6>
-                            {dimension === 'width'
-                                ? 'Довжина'
-                                : dimension === 'height'
-                                    ? 'Ширина'
-                                    : 'Довжина заокруглення'}
-                        </h6>
-                        <input
-                            type="number"
-                            value={tableDimensions[dimension]}
-                            onChange={(e) =>
-                                handleDimensionChange(dimension, Number(e.target.value))
-                            }
-                        />
-                        <input
-                            type="range"
-                            value={tableDimensions[dimension]}
-                            min="0"
-                            max={dimension === 'radius' ? 50 : 200}
-                            onChange={(e) =>
-                                handleDimensionChange(dimension, Number(e.target.value))
-                            }
-                        />
-                    </div>
-                ))}
-            </div>
-
-            <h4 className={styles.oldPrice} style={{ textDecoration: 'line-through' }}>
-                Ціна: 299
-            </h4>
-            <h3 className={styles.newPrice}>Ціна: 199</h3>
-
+            <TableShape shape={shape} setShape={setShape} />
+            <GlassType glassType={glassType} setGlassType={setGlassType} glassThickness={glassThickness}/>
+            <GlassThickness glassThickness={glassThickness} setThickness={setThickness} />
+            <TableDimensions
+                tableDimensions={tableDimensions}
+                setTableDimensions={setTableDimensions}
+                shape={shape}
+            />
+            <PriceDisplay />
             <button
                 className={styles.mainButton}
                 onClick={() => alert('Додано в кошик')}
             >
-                Додати в кошик
+                Додати до кошика
             </button>
+            <p>
+                Підтверджуючи замовлення, Ви приймаєте умови <Link href="">публічного договору</Link>.
+            </p>
         </div>
     );
 };
