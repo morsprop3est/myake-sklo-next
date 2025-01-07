@@ -28,11 +28,6 @@ const Header = () => {
                                 <li><a href="#contact-us">Контакти</a></li>
                                 <li><a href="#reviews">Відгуки</a></li>
                                 <li><a href="#calculator" className={styles.btnCalculator}>Калькулятор</a></li>
-                                <li><a href="#">
-                                    <div className={styles.cartLogo}><img
-                                        src="/images/cart-logo.svg"
-                                        alt="cart-logo"/></div>
-                                </a></li>
                             </ul>
                         </nav>
 

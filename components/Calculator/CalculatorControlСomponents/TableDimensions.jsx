@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../Calculator.module.scss';
 
 const TableDimensions = ({ tableDimensions, setTableDimensions, shape }) => {
-    const [radiusMax, setRadiusMax] = useState(200);
+    const [radiusMax, setRadiusMax] = useState(100);
     const [showRadius, setShowRadius] = useState(false);
     const [showLengthWidth, setShowLengthWidth] = useState(true);
 
@@ -40,24 +40,33 @@ const TableDimensions = ({ tableDimensions, setTableDimensions, shape }) => {
     useEffect(() => {
         switch (shape) {
             case 'rectangle':
+                setShowRadius(false);
+                setShowLengthWidth(true);
+                setTableDimensions({ width: 100, height: 50, radius: 0 });
+                break;
             case 'oval':
                 setShowRadius(false);
                 setShowLengthWidth(true);
+                setTableDimensions({ width: 100, height: 50, radius: 15 });
                 break;
             case 'round':
                 setShowRadius(true);
                 setShowLengthWidth(false);
-                setRadiusMax(200);
+                setRadiusMax(100);
+                setTableDimensions({ width: 100, height: 100, radius: 50 });
                 break;
             case 'rounded':
                 setShowRadius(true);
                 setShowLengthWidth(true);
+                setTableDimensions({ width: 100, height: 50, radius: 15 });
                 break;
             default:
                 setShowRadius(false);
                 setShowLengthWidth(true);
+                setTableDimensions({ width: 100, height: 100, radius: 0 });
         }
     }, [shape]);
+
 
     return (
         <div className={styles.calculatorItemWrapper}>
