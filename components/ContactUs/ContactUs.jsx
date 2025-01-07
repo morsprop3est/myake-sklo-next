@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/image';
 import styles from './ContactUs.module.scss';
 
@@ -7,16 +8,16 @@ const ContactUs = () => {
             <div className={styles.container}>
                 <div className={styles.contactUsWrapper}>
                     <div className={styles.contactUsPart1}>
-                        <div className={styles.contactUsText} data-aos="zoom-in">
+                        <div className={styles.contactUsText}>
                             <h6 className={styles.contactUsHeader}>Зворотній зв’язок</h6>
                             <p>Якщо ви зацікавлені у співпраці з нами, ми будемо раді обговорити можливості для взаємодії.</p>
                         </div>
-                        <div className={styles.contactUsImage} data-aos="fade-in" data-aos-offset="100" data-aos-duration="500">
+                        <div className={styles.contactUsImage}>
                             <Image src="/images/contact-us-photo.png" alt="" width={232} height={232} />
                         </div>
                     </div>
                     <div className={styles.contactUsPart2}>
-                        <div className={styles.contactUsLeft} data-aos="zoom-in" data-aos-offset="100" data-aos-duration="500">
+                        <div className={styles.contactUsLeft}>
                             <form className={styles.contactForm}>
                                 <label htmlFor="name">Ваше ім’я</label>
                                 <input type="text" id="name" name="name" placeholder="Введіть ім’я" required />
@@ -27,8 +28,8 @@ const ContactUs = () => {
                                 <button type="submit" className={styles.calculatorButton}>Відправити</button>
                             </form>
                         </div>
-                        <div className={styles.contactUsRight} data-aos="zoom-in" data-aos-offset="100" data-aos-duration="500">
-                            <div className={styles.contactUsItem} data-aos="zoom-in">
+                        <div className={styles.contactUsRight}>
+                            <div className={styles.contactUsItem}>
                                 <div className={styles.contactUsItemImage}>
                                     <Image src="/images/contact-us-photo1.svg" alt="" width={25} height={25} />
                                 </div>
@@ -37,7 +38,7 @@ const ContactUs = () => {
                                     <p>м.Рівне вул.Володимира Стельмаха 11</p>
                                 </div>
                             </div>
-                            <div className={styles.contactUsItem} data-aos="zoom-in">
+                            <div className={styles.contactUsItem}>
                                 <div className={styles.contactUsItemImage}>
                                     <Image src="/images/contact-us-photo2.svg" alt="" width={25} height={25} />
                                 </div>
@@ -47,7 +48,7 @@ const ContactUs = () => {
                                     <p>+38(073) 400-94-08</p>
                                 </div>
                             </div>
-                            <div className={styles.contactUsItem} data-aos="zoom-in">
+                            <div className={styles.contactUsItem}>
                                 <div className={styles.contactUsItemImage}>
                                     <Image src="/images/contact-us-photo3.svg" alt="" width={25} height={25} />
                                 </div>
@@ -57,7 +58,7 @@ const ContactUs = () => {
                                     <p>ПН - ПТ</p>
                                 </div>
                             </div>
-                            <div className={styles.contactUsItem} data-aos="zoom-in">
+                            <div className={styles.contactUsItem}>
                                 <div className={styles.contactUsItemImage}>
                                     <Image src="/images/contact-us-photo4.svg" alt="" width={25} height={25} />
                                 </div>
@@ -66,7 +67,7 @@ const ContactUs = () => {
                                     <p>myagkoyesteklo@gmail.com</p>
                                 </div>
                             </div>
-                            <div className={styles.contactUsItemExtended} data-aos="zoom-in">
+                            <div className={styles.contactUsItemExtended}>
                                 <h6>Соціальні мережі</h6>
                                 <div>
                                     <div className={styles.contactUsRoundedButton}></div>

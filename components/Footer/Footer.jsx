@@ -15,10 +15,10 @@ const Footer = () => {
                         </a>
                     </div>
                     <div className={styles.footerContent}>
-                        <div className={styles.footerLeft} data-aos="zoom-in">
+                        <div className={styles.footerLeft}>
                             <p>Надійний захист виробничих, побутових та домашніх поверхонь від зовнішніх пошкоджень.</p>
                         </div>
-                        <div className={styles.footerCenter} data-aos="zoom-in">
+                        <div className={styles.footerCenter}>
                             <ul className={styles.navList}>
                                 <li><a href="#">Головна</a></li>
                                 <li><a href="#">Переваги</a></li>
@@ -28,7 +28,7 @@ const Footer = () => {
                             </ul>
                         </div>
                         <div className={styles.footerRight}>
-                            <div className={styles.footerRightWrapper} data-aos="zoom-in" data-aos-duration="500">
+                            <div className={styles.footerRightWrapper}>
                                 <div className={styles.footerRightItem}>
                                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10.4635 9.53298L10.0839 9.91551C10.0839 9.91551 9.18174 10.8249 6.71924 8.34265C4.25676 5.86044 5.15891 4.95105 5.15891 4.95105L5.39791 4.71012C5.98674 4.11661 6.04224 3.16373 5.52849 2.46809L4.47771 1.04509C3.84189 0.184096 2.6133 0.0703596 1.88454 0.804954L0.57654 2.12344C0.21519 2.48769 -0.0269598 2.95986 0.00240683 3.48366C0.0775318 4.8237 0.675589 7.70693 4.01279 11.0709C7.55174 14.6382 10.8723 14.7799 12.2302 14.6516C12.6597 14.611 13.0332 14.3893 13.3342 14.0858L14.5181 12.8926C15.3172 12.0871 15.0918 10.7062 14.0694 10.1428L12.4773 9.26535C11.806 8.8954 10.9882 9.00405 10.4635 9.53298Z" fill="#222831"/>

@@ -40,19 +40,18 @@ const PhotoGrid = ({ tableDimensions, glassType, glassThickness }) => {
 
     return (
         <div className={styles.photoGridWrapper}>
-            <div className={styles.menu} data-aos="zoom-in">
+            <div className={styles.menu}>
                 {['icon', 'photo1', 'photo2', 'photo3', 'photo4'].map((type, index) => (
                     <button className={styles.menuBtn} data-type={type} key={index}>
                         <img
                             src={`/images/calculator-${type}.jpg`}
                             alt={`Фото ${index + 1}`}
-                            data-aos="zoom-in"
                         />
                     </button>
                 ))}
             </div>
 
-            <div className={styles.displayArea} data-aos="zoom-in" data-aos-offset="100" data-aos-duration="500">
+            <div className={styles.displayArea}>
                 <div className={styles.gridDisplayWrapper}>
                     <div
                         className={`${styles.tableShape} ${styles[glassType]} ${styles[glassThickness]}`}

@@ -3,8 +3,8 @@ import styles from './FastBuy.module.scss';
 
 const FastBuyCard = ({ imageSrc, title, features, inputValues }) => {
     return (
-        <div className={styles.fastBuyContainer} data-aos="fade-up" data-aos-offset="200" data-aos-duration="400">
-            <img src={imageSrc} alt="" data-aos="zoom-in" />
+        <div className={styles.fastBuyContainer}>
+            <img src={imageSrc} alt=""/>
             <h5>{title}</h5>
             <ul>
                 {features.map((feature, index) => (
@@ -35,7 +35,7 @@ const FastBuyCard = ({ imageSrc, title, features, inputValues }) => {
                     />
                 </div>
             </div>
-            <button className={styles.calculatorButton}>Додати до кошика</button>
+            <button className={styles.mainButton}>Додати до кошика</button>
         </div>
     );
 };

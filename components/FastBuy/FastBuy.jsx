@@ -6,12 +6,7 @@ const FastBuy = () => {
     return (
         <section className={styles.fastBuy}>
             <div className={styles.container}>
-                <h6
-                    className={styles.fastBuyHeader}
-                    data-aos="zoom-in"
-                    data-aos-offset="100"
-                    data-aos-duration="500"
-                >
+                <h6 className={styles.fastBuyHeader}>
                     Швидка покупка
                 </h6>
                 <div className={styles.fastBuyWrapper}>
@@ -39,7 +34,7 @@ const FastBuy = () => {
                     />
                     <FastBuyCard
                         imageSrc="/images/fast-buy-photo1.jpg"
-              ё          title="Глянцеве скло"
+                        title="Глянцеве скло"
                         features={[
                             'Зроблено в Україні',
                             'Безкоштовна доставка від 2000 грн при повній оплаті',

@@ -6,23 +6,11 @@ const Main = () => {
         <section className={styles.main} id="main">
             <div className={styles.mainPart1}>
                 <div className={styles.container}>
-                    <div
-                        className={styles.mainPart1Wrapper}
-                        data-aos="fade-in"
-                        data-aos-duration="1000"
-                    >
-                        <h1
-                            className={styles.mainH1}
-                            data-aos="fade-right"
-                            data-aos-duration="800"
-                        >
+                    <div className={styles.mainPart1Wrapper}>
+                        <h1 className={styles.mainH1}>
                             Офіційний виробник М'якого Скла в Україні
                         </h1>
-                        <p
-                            className={styles.mainP}
-                            data-aos="fade-right"
-                            data-aos-duration="1200"
-                        >
+                        <p className={styles.mainP}>
                             Захистіть ваші виробничі, побутові та домашні поверхні від зовнішніх
                             пошкоджень
                         </p>
@@ -42,11 +30,7 @@ const Main = () => {
                         alt=""
                     />
                 </div>
-                <div
-                    className={styles.mainImageWrapper}
-                    data-aos="fade-left"
-                    data-aos-duration="1000"
-                >
+                <div className={styles.mainImageWrapper}>
                     <img
                         src="images/main-image.png"
                         alt="main-image"
@@ -56,11 +40,7 @@ const Main = () => {
 
             <div className={styles.mainPart2}>
                 <div className={styles.container}>
-                    <div
-                        className={styles.mainPart2Wrapper}
-                        data-aos="zoom-in"
-                        data-aos-duration="500"
-                    >
+                    <div className={styles.mainPart2Wrapper}>
                         <a href="#calculator">
                             <div className={styles.mainButton}>Хочу замовити!</div>
                         </a>

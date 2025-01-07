@@ -28,6 +28,8 @@
     max-width: calc(33.3% - 20px);
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
     padding: 40px;
     border-radius: 2px;
@@ -37,7 +39,6 @@
     img {
       width: 100%;
       height: 100%;
-      margin: 0 auto;
     }
 
     h5 {
@@ -80,17 +81,23 @@
       }
     }
 
-    button.mainButton {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4caf50;
+    .mainButton {
+      width: 250px;
+      padding: 20px;
+      background-color: #e2ae53;
       color: white;
+      font-size: 18px;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
+      border-radius: 2px;
+      transition: background-color 0.3s;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-weight: 400;
+      box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+
 
       &:hover {
-        background-color: #45a049;
+        background-color: #c49748;
       }
     }
   }

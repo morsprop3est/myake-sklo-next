@@ -9,7 +9,7 @@ const Header = () => {
             <div className={styles.headerInner}>
                 <div className={styles.container}>
                     <div className={styles.headerWrapper}>
-                        <div className={styles.headerLeft} data-aos="fade-down" data-aos-duration="1000">
+                        <div className={styles.headerLeft}>
                             <a href="#" className={styles.headerLogo}>
                                 <Image
                                     src="/images/logo.svg"
@@ -20,7 +20,7 @@ const Header = () => {
                             </a>
                         </div>
 
-                        <nav className={styles.mainNav} data-aos="fade-down" data-aos-duration="1000">
+                        <nav className={styles.mainNav}>
                             <ul className={styles.navList}>
                                 <li><a href="#main">Головна</a></li>
                                 <li><a href="#advantages">Переваги</a></li>
