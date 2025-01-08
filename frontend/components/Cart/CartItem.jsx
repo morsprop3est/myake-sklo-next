@@ -18,7 +18,7 @@ const CartItem = ({ product, onRemove, onUpdateQuantity }) => {
             <div className={styles.cartItemInfo}>
                 <h4>{name}</h4>
                 <p>{`Розміри: ширина: ${dimensions.width} см, висота: ${dimensions.height} см`}</p>
-                <p>{`Тип скла: ${product.glassType}, Товщина скла: ${product.glassThickness}`}</p>
+                <p>{`Тип скла: ${product.glassType}, Товщина скла: ${product.glassThickness}, Форма скла: $$$}`}</p>
             </div>
             <div className={styles.price}>
                 <span>{`${price} грн`}</span>
