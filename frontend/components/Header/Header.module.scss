@@ -1,0 +1,199 @@
+@import './styles/variables.scss';
+@import './styles/container.scss';
+
+.siteHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  position: absolute;
+  scroll-margin-top: 100px;
+  margin: 0 auto;
+  z-index: 9999;
+
+  .headerInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+
+    .headerWrapper {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .headerLeft {
+        .headerLogo {
+          img {
+            max-height: 50px;
+            width: 100px;
+          }
+        }
+      }
+
+      .mainNav {
+        display: flex;
+        align-items: center;
+        height: 100px;
+
+        .navList {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          gap: 10px;
+
+          li {
+            position: relative;
+          }
+
+          a {
+            color: #222831;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+          }
+
+          .btnCalculator {
+            background-color: #fff;
+            color: #222831;
+            font-size: 16px;
+            padding: 15px 20px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 2px;
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.25);
+
+            &:hover {
+              scale: 0.9;
+            }
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .burgerMenu {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        border: none;
+        z-index: 10000;
+        position: relative;
+        background-color: transparent;
+
+        .burgerLine {
+          width: 30px;
+          height: 4px;
+          background-color: #222831;
+          margin: 4px 0;
+          border-radius: 2px;
+          transition: all 0.3s ease;
+        }
+
+        &.active {
+          .burgerLine:nth-child(1) {
+            transform: translateY(12px) rotate(45deg);
+          }
+
+          .burgerLine:nth-child(2) {
+            opacity: 0;
+          }
+
+          .burgerLine:nth-child(3) {
+            transform: translateY(-12px) rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+
+  .mobileNav {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+
+    &.active {
+      right: 0;
+    }
+
+    .navList {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      a {
+        color: #222831;
+        font-size: 18px;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+
+
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .siteHeader {
+      .headerInner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+
+        .headerWrapper {
+          padding: 10px 15px;
+
+          .headerLeft {
+            .headerLogo {
+              img {
+                width: 50px;
+              }
+            }
+          }
+
+          .mainNav {
+            display: none;
+
+            .navList {
+              a {
+                font-size: $font-size-16-tablet;
+              }
+            }
+          }
+
+          .burgerMenu {
+            display: flex;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 601px) {
+
+  }
+}

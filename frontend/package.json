@@ -1,0 +1,19 @@
+{
+  "name": "myake-sklo-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "iconic-react": "^0.5.0",
+    "js-cookie": "^3.0.5",
+    "next": "^15.1.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sass": "^1.83.1"
+  }
+}

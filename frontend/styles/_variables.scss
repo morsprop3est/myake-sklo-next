@@ -1,0 +1,20 @@
+// Default (Desktop)
+$font-size-32: 32px;
+$font-size-24: 24px;
+$font-size-20: 20px;
+$font-size-16: 16px;
+$font-size-12: 12px;
+
+// Tablet (601px - 1024px)
+$font-size-32-tablet: calc(24px + (32 - 24) * ((100vw - 601px) / (1024 - 601)));
+$font-size-24-tablet: calc(20px + (24 - 20) * ((100vw - 601px) / (1024 - 601)));
+$font-size-20-tablet: calc(16px + (20 - 16) * ((100vw - 601px) / (1024 - 601)));
+$font-size-16-tablet: calc(12px + (16 - 12) * ((100vw - 601px) / (1024 - 601)));
+$font-size-12-tablet: calc(10px + (12 - 10) * ((100vw - 601px) / (1024 - 601)));
+
+// Phone (480px - 601px)
+$font-size-32-phone: calc(24px + (32 - 24) * ((100vw - 480px) / (601 - 480)));
+$font-size-24-phone: calc(20px + (24 - 20) * ((100vw - 480px) / (601 - 480)));
+$font-size-20-phone: calc(16px + (20 - 16) * ((100vw - 480px) / (601 - 480)));
+$font-size-16-phone: calc(12px + (16 - 12) * ((100vw - 480px) / (601 - 480)));
+$font-size-12-phone: calc(10px + (12 - 10) * ((100vw - 480px) / (601 - 480)));
