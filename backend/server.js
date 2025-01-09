@@ -23,7 +23,6 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/post-office", postOfficeRoutes);
 
-
 sequelize.authenticate()
     .then(() => {
         console.log("Connected to the MySQL database.");

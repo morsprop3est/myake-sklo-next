@@ -3,7 +3,7 @@ const axios = require("axios");
 const getCitiesFromAPI = async () => {
     let allCities = [];
     let currentPage = 1;
-    const limit = 250;
+    const limit = 1000;
     try {
         while (true) {
             console.log(`Fetching page ${currentPage}...`);

@@ -12,7 +12,7 @@ const City = sequelize.define(
         settlement_type_description: { type: DataTypes.STRING, allowNull: true },
         area_description: { type: DataTypes.STRING, allowNull: true },
         area_description_ru: { type: DataTypes.STRING, allowNull: true },
-        city_ref: { type: DataTypes.STRING, allowNull: true },
+        city_ref: { type: DataTypes.STRING, allowNull: true, unique: true},
     },
     {
         timestamps: true,

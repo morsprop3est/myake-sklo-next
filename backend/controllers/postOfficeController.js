@@ -1,11 +1,53 @@
+const sequelize = require("../db");
 const PostOffice = require("../models/PostOffice");
+const { getPostOfficesFromAPI } = require("../services/postOfficeServices");
 
-exports.createPostOffice = async (req, res) => {
+exports.importPostOffices = async (req, res) => {
+    const transaction = await sequelize.transaction();
+
     try {
-        const postOffice = await PostOffice.create(req.body);
-        res.status(201).json(postOffice);
+        await PostOffice.destroy({ where: {} }, { transaction });
+
+        const postOffices = await getPostOfficesFromAPI();
+
+        let skippedOffices = 0;
+
+        for (const office of postOffices) {
+            try {
+                await PostOffice.create(
+                    {
+                        ref: office.Ref,
+                        description: office.Description,
+                        description_ru: office.DescriptionRu || null,
+                        short_address: office.ShortAddress,
+                        short_address_ru: office.ShortAddressRu || null,
+                        settlement_description: office.SettlementDescription,
+                        settlement_area_description: office.SettlementAreaDescription,
+                        settlement_type_description: office.SettlementTypeDescription,
+                        postal_code: office.PostalCodeUA || null,
+                        city_ref: office.CityRef,
+                        type_of_post_office_ref: office.TypeOfWarehouse,
+                    },
+                    { transaction }
+                );
+            } catch (error) {
+                console.error("Error importing post office:", error.message);
+                skippedOffices++;
+                continue;
+            }
+        }
+
+        await transaction.commit();
+
+        res.status(200).json({
+            message: "Post offices successfully imported",
+            data: postOffices.length,
+            skipped: skippedOffices,
+        });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        await transaction.rollback();
+        console.error("Error importing post offices:", error.message);
+        res.status(500).json({ message: "Failed to import post offices", error: error.message });
     }
 };
 

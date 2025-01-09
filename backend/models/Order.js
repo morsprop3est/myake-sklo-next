@@ -24,6 +24,6 @@ const Order = sequelize.define(
     }
 );
 
-Order.belongsTo(PostOffice, { foreignKey: "post_office_id" });
+Order.belongsTo(PostOffice, { foreignKey: "ref" });
 
 module.exports = Order;

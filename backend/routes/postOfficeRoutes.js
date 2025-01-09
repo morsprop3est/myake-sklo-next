@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const postOfficeController = require("../controllers/postOfficeController");
+const PostOfficeController = require("../controllers/PostOfficeController");
 
-router.post("/", postOfficeController.createPostOffice);
-router.get("/", postOfficeController.getAllPostOffices);
-router.get("/:id", postOfficeController.getPostOfficeById);
+router.get("/", PostOfficeController.getAllPostOffices);
+router.get("/:id", PostOfficeController.getPostOfficeById);
+router.post("/import", PostOfficeController.importPostOffices);
+
 
 module.exports = router;
