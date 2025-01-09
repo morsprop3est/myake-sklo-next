@@ -1,11 +1,13 @@
 require('dotenv').config();
 const express = require("express");
+const router = express.Router();
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cartRoutes = require("./routes/cartRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const postOfficeRoutes = require("./routes/postOfficeRoutes");
+const cityRoutes = require("./routes/cityRoutes");
 const sequelize = require("./db");
 
 app.use((req, res, next) => {
@@ -16,9 +18,11 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use("/api/cities", cityRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/post-office", postOfficeRoutes);
+
 
 sequelize.authenticate()
     .then(() => {
