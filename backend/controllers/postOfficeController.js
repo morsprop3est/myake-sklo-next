@@ -72,3 +72,27 @@ exports.getPostOfficeById = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+
+exports.searchPostOfficesByCityRef = async (req, res) => {
+    try {
+        const { city_ref } = req.params;
+
+        if (!city_ref) {
+            return res.status(400).json({ message: "Please provide a city_ref" });
+        }
+
+        const postOffices = await PostOffice.findAll({
+            where: { city_ref: city_ref },
+        });
+
+        if (postOffices.length > 0) {
+            res.status(200).json(postOffices);
+        } else {
+            res.status(404).json({ message: "No post offices found for this city" });
+        }
+    } catch (error) {
+        console.error("Error fetching post offices: ", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};

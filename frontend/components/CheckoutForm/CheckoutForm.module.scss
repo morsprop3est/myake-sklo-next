@@ -36,11 +36,16 @@
       flex-direction: column;
       margin-bottom: 15px;
 
+      textarea {
+        height: 50px;
+      }
+
       input,
       textarea {
         margin-top: 8px;
-        padding: 10px;
-        font-size: 1rem;
+        padding: 15px;
+        font-size: 14px;
+        font-family: 'Montserrat Alternates', sans-serif;
         border: 1px solid #e1e1e1;
         border-radius: 6px;
         transition: border-color 0.3s;
@@ -49,15 +54,100 @@
           border-color: #f1f1f1;
           outline: none;
         }
+
+        resize: none;
       }
+    }
+
+    .deliveryInfo {
+      .label {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+        display: block;
+        color: #333;
+      }
+
+      .input,
+      .select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .input:focus,
+      .select:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+
+      .suggestedCitiesList {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        z-index: 100;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 2px solid #ddd;
+      }
+
+      .cityOption {
+        padding: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .cityOption:hover {
+        background-color: #f0f0f0;
+      }
+
+      .cityOption:active {
+        background-color: #007bff;
+        color: #fff;
+      }
+
     }
 
     .personalInfo,
     .deliveryInfo,
     .orderInfo {
-      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 20px;
       border-radius: 8px;
       border: 1px solid #e1e1e1;
+
+
+      .deliveryHeader {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        justify-content: start;
+        align-items: center;
+
+        .deliveryPhoto {
+          width: 40px;
+          height: 40px;
+        }
+
+        h2 {
+          margin-bottom: 15px;
+          font-size: 1.5rem;
+        }
+      }
+
     }
 
     .orderInfo p {
@@ -68,18 +158,84 @@
     .submitButton {
       grid-column: 1 / -1;
       margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 1.2rem;
-      font-weight: bold;
+      padding: 15px 20px;
+      font-size: 16px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-weight: 400;
       background-color: #e2ae53;
-      color: #ffffff;
+      color: #222831;
       border: none;
-      border-radius: 6px;
+      border-radius: 2px;
       cursor: pointer;
       transition: background-color 0.3s;
 
       &:hover {
         background-color: darken(#e2ae53, 10%);
+      }
+    }
+
+    .paymentMethod {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        font-weight: normal;
+        cursor: pointer;
+
+        input[type="radio"] {
+          margin-right: 10px;
+          width: 20px;
+          height: 20px;
+          appearance: none;
+          border-radius: 50%;
+          border: 2px solid #ccc;
+          background-color: #fff;
+          transition: background-color 0.3s, border 0.3s;
+        }
+
+        input[type="radio"]:checked {
+          background-color: #e2ae53;
+          border-color: #e2ae53;
+        }
+
+        input[type="radio"]:focus {
+          outline: none;
+          border-color: #f1f1f1;
+        }
+
+        span {
+          font-size: 1rem;
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .suggestedCitiesList {
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #fff;
+      border: 1px solid #e1e1e1;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      padding: 5px 0;
+      margin-top: 5px;
+    }
+
+    .cityOption {
+      padding: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #f1f1f1;
       }
     }
   }

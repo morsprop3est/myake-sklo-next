@@ -1,6 +1,8 @@
 const City = require("../models/City");
 const { getCitiesFromAPI } = require("../services/cityServices");
 const sequelize = require("../db");
+const { Op } = require("sequelize");
+
 
 exports.importCities = async (req, res) => {
     const transaction = await sequelize.transaction();
@@ -62,3 +64,45 @@ exports.getCityById = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+
+exports.searchCities = async (req, res) => {
+    try {
+        const { description } = req.params;
+
+        if (!description) {
+            return res.status(400).json({ message: "Please provide a search query" });
+        }
+
+        const cities = await City.findAll({
+            where: {
+                description: {
+                    [Op.like]: `${description.toLowerCase()}%`
+                }
+            },
+            order: [
+                [
+                    sequelize.literal(`
+                        CASE
+                            WHEN settlement_type_description = 'місто' THEN 1
+                            WHEN settlement_type_description = 'село' THEN 2
+                            WHEN settlement_type_description = 'селище міського типу' THEN 3
+                            ELSE 4
+                        END
+                    `), 'ASC'],
+                ['description', 'ASC']
+            ]
+        });
+
+        if (cities.length > 0) {
+            res.status(200).json(cities);
+        } else {
+            res.status(404).json({ message: "No cities found" });
+        }
+
+    } catch (error) {
+        console.error("Error searching cities: ", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
+
