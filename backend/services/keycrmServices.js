@@ -1,28 +1,60 @@
 const axios = require("axios");
 require('dotenv').config();
 
+const getProductProperties = (product) => {
+    const properties = [
+        { name: "Glass Type", value: product.glass_type || "" },
+        { name: "Glass Thickness", value: product.glass_thickness || "" },
+        { name: "Shape", value: product.shape || "" },
+    ];
+
+    if (product.dimensions) {
+        if (product.dimensions.width) {
+            properties.push({ name: "Width", value: product.dimensions.width.toString() });
+        }
+        if (product.dimensions.height) {
+            properties.push({ name: "Height", value: product.dimensions.height.toString() });
+        }
+        if (product.dimensions.radius) {
+            properties.push({ name: "Radius", value: product.dimensions.radius.toString() });
+        }
+    }
+
+    return properties;
+};
+
+const getPaymentData = (orderData) => {
+    let paymentMethodId = "";
+    let status = "not_paid";
+    if (orderData.payment_type === "wayforpay") {
+        paymentMethodId = "29"; // ID для "wayforpay"
+    } else if (orderData.payment_type === "fop") {
+        paymentMethodId = "7"; // ID для "fop"
+    } else if (orderData.payment_type === "cash_on_delivery") {
+        paymentMethodId = "17"; // ID для "cash_on_delivery"
+    }
+
+    if (orderData.payment_status === "paid") {
+        status = "paid";
+    }
+
+    return {
+        payment_method_id: paymentMethodId,
+        payment_method: orderData.payment_type || "",
+        amount: orderData.total_price || 0,
+        description: orderData.comments || "",
+        status: status,
+    };
+};
+
 const sendOrderToKeyCRM = async (orderData) => {
     try {
         const apiUrl = process.env.KEYCRM_API_URL;
         const apiToken = process.env.KEYCRM_API_KEY;
 
-        let paymentMethodId = "";
-        let status = "not_paid";
-        if (orderData.payment_type === "wayforpay") {
-            paymentMethodId = "29"; // ID для "wayforpay"
-        } else if (orderData.payment_type === "fop") {
-            paymentMethodId = "7"; // ID для "fop"
-        } else if (orderData.payment_type === "cash_on_delivery") {
-            paymentMethodId = "17"; // ID для "cash_on_delivery"
-        }
-
-        if (orderData.payment_status === "paid") {
-            status = "paid";
-        }
-
         const formattedData = {
             source_id: 33,
-            source_uuid: "115",
+            source_uuid: 1488,
             buyer_comment: orderData.comments || "",
             manager_id: 23,
             manager_comment: "тест перевірка",
@@ -73,16 +105,9 @@ const sendOrderToKeyCRM = async (orderData) => {
                 name: product.product_name || "",
                 comment: product.comment || "",
                 picture: product.picture || "",
-                properties: product.properties || [],
+                properties: getProductProperties(product),
             })),
-            payments: [{
-                payment_method_id: paymentMethodId,
-                payment_method: orderData.payment_type || "",
-                amount: orderData.total_price || 0,
-                description: orderData.comments || "",
-                status: status,
-            }],
-            custom_fields: orderData.custom_fields || [],
+            payments: [getPaymentData(orderData)],
         };
 
         const response = await axios.post(apiUrl, formattedData, {
