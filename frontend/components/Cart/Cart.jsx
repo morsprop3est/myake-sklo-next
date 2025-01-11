@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import CartButton from './CartButton';
 import CartItem from './CartItem';
 import styles from './Cart.module.scss';
 import { useCart } from '@/hooks/useCart';
 
 const Cart = () => {
-    const { products, removeItemFromCart, updateItemQuantity, totalPrice, cartCount } = useCart(); // Використовуємо хук
+    const { products, removeItemFromCart, updateItemQuantity, totalPrice, cartCount } = useCart(); 
 
     const [isCartVisible, setIsCartVisible] = useState(false);
     const [promoCode, setPromoCode] = useState('');
@@ -21,6 +22,8 @@ const Cart = () => {
     const applyPromoCode = () => {
         setDiscount(promoCode === 'DISCOUNT10' ? 0.1 : 0);
     };
+
+
 
     const totalAmount = products.reduce((total, product) => total + product.price * product.quantity, 0);
     const discountedAmount = totalAmount * (1 - discount);
@@ -68,7 +71,11 @@ const Cart = () => {
                             <button onClick={applyPromoCode}>Застосувати</button>
                         </div>
 
-                        <button className={styles.orderButton}>Оформити замовлення</button>
+                        <Link href="/checkout">
+                            <button className={styles.orderButton}>
+                                Оформити замовлення
+                            </button>
+                        </Link>
                     </div>
                 </>
             )}

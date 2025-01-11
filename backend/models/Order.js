@@ -21,7 +21,7 @@ const Order = sequelize.define(
             allowNull: false
         },
         payment_status: {
-            type: DataTypes.ENUM("pending", "paid", "failed"),
+            type: DataTypes.ENUM("pending", "paid", "failed", "not_paid"),
             defaultValue: "pending"
         },
         delivery_type: {
@@ -41,6 +41,5 @@ const Order = sequelize.define(
         updatedAt: "updated_at",
     }
 );
-
 
 module.exports = Order;

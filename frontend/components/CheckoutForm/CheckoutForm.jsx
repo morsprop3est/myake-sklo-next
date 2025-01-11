@@ -1,7 +1,9 @@
 'use client';
 
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { fetchCities } from "@/api/cities";
+import { fetchPostOffices } from "@/api/postOffices";
+import { submitOrder } from "@/api/order";
 import styles from "./CheckoutForm.module.scss";
 import Image from "next/image";
 
@@ -18,13 +20,25 @@ const CheckoutForm = () => {
         email: "",
         city: "",
         post_office_id: "",
-        products: [
-            { name: "М'яке скло", size: "120смх140см", thickness: "1.5мм" }
-        ],
-        total_price: 199.2,
+        post_office_address: "",
+        post_office_ref: "",
+        products: [],
+        total_price: 0,
         payment_type: "",
+        payment_status: "not_paid",
         delivery_type: "",
+        comments: ""
     });
+
+    useEffect(() => {
+        const cartProducts = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalPrice = cartProducts.reduce((total, product) => total + product.price * product.quantity, 0);
+        setOrder((prevOrder) => ({
+            ...prevOrder,
+            products: cartProducts,
+            total_price: totalPrice
+        }));
+    }, []);
 
     const handleCityInputChange = (e) => {
         const query = e.target.value;
@@ -41,25 +55,9 @@ const CheckoutForm = () => {
 
         setDebounceTimeout(
             setTimeout(() => {
-                fetchCities(query);
+                fetchCities(query).then(setSuggestedCities).catch(console.error);
             }, 500)
         );
-    };
-
-    const fetchCities = async (query) => {
-        try {
-            setIsLoading(true);
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/cities/search/${query}`);
-            setSuggestedCities(response.data);
-        } catch (error) {
-            if (error.response && error.response.status === 404) {
-                setSuggestedCities([]);
-            } else {
-                console.error("Error fetching cities:", error);
-            }
-        } finally {
-            setIsLoading(false);
-        }
     };
 
     const handleCitySelect = async (city) => {
@@ -70,53 +68,46 @@ const CheckoutForm = () => {
         setCityQuery(city.description);
         setSuggestedCities([]);
 
-        await fetchPostOffices(city.city_ref);
-    };
-
-    const fetchPostOffices = async (cityId) => {
         try {
-            setIsLoading(true);
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/post-office/search/${cityId}`);
-            setPostOffices(response.data);
+            const postOffices = await fetchPostOffices(city.city_ref);
+            setPostOffices(postOffices);
         } catch (error) {
-            console.error("Error fetching post offices:", error);
-            setPostOffices([]);
-        } finally {
-            setIsLoading(false);
+            console.error(error);
         }
     };
 
     const handlePostOfficeChange = (e) => {
         const selectedPostOfficeId = e.target.value;
-        const selectedPostOffice = postOffices.find(office => office.id === selectedPostOfficeId);
+        const selectedPostOffice = postOffices.find(office => office.id === parseInt(selectedPostOfficeId));
 
         setOrder((prevOrder) => ({
             ...prevOrder,
             post_office_id: selectedPostOfficeId,
-            post_office_description: selectedPostOffice ? selectedPostOffice.description : "",
+            post_office_address: selectedPostOffice ? selectedPostOffice.description : "",
+            post_office_ref: selectedPostOffice ? selectedPostOffice.ref : "",
         }));
     };
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/order`, order);
-            console.log("Order submitted:", response.data);
+            await submitOrder(order);
         } catch (error) {
-            console.error("Error submitting order:", error);
+            console.error(error);
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setOrder((prevOrder) => ({
-            ...prevOrder,
-            [name]: value,
-        }));
+        setOrder((prevOrder) => {
+            let newOrder = { ...prevOrder, [name]: value };
+            if (name === "payment_type") {
+                newOrder.delivery_type = value === "prepayment" ? "pickup" : "nova_poshta";
+            }
+            return newOrder;
+        })
         console.log(order);
     };
-
 
     return (
         <div className={styles.checkoutFormWrapper}>
@@ -177,6 +168,7 @@ const CheckoutForm = () => {
                                     type="radio"
                                     name="payment_type"
                                     value="wayforpay"
+                                    checked={order.payment_type === "wayforpay"}
                                     onChange={handleInputChange}
                                     required
                                 />
@@ -187,6 +179,7 @@ const CheckoutForm = () => {
                                     type="radio"
                                     name="payment_type"
                                     value="prepayment"
+                                    checked={order.payment_type === "prepayment"}
                                     onChange={handleInputChange}
                                 />
                                 Передплата 200 грн (решту оплачуєте при отриманні)
@@ -196,6 +189,7 @@ const CheckoutForm = () => {
                                     type="radio"
                                     name="payment_type"
                                     value="fop"
+                                    checked={order.payment_type === "fop"}
                                     onChange={handleInputChange}
                                 />
                                 Оплата на рахунок ФОП
@@ -264,23 +258,45 @@ const CheckoutForm = () => {
 
                     <div className={styles.orderInfo}>
                         <h2>Замовлення</h2>
+                        {order.products.map((product, index) => (
+                            <div key={index}>
+                                <p>
+                                    <strong>Назва продукту:</strong> {product.product_name}
+                                </p>
+                                <p>
+                                    <strong>Ціна:</strong> {product.price} грн
+                                </p>
+                                <p>
+                                    <strong>Кількість:</strong> {product.quantity}
+                                </p>
+                                <p>
+                                    <strong>Розміри:</strong> {product.dimensions.width}см x {product.dimensions.height}см
+                                    {product.dimensions.radius && `, Радіус: ${product.dimensions.radius}см`}
+                                </p>
+                                <p>
+                                    <strong>Тип скла:</strong> {product.glass_type}
+                                </p>
+                                <p>
+                                    <strong>Товщина скла:</strong> {product.glass_thickness}
+                                </p>
+                                <p>
+                                    <strong>Форма:</strong> {product.shape}
+                                </p>
+                            </div>
+                        ))}
                         <p>
-                            <strong>Розміри:</strong> 120смх140см
-                        </p>
-                        <p>
-                            <strong>Тип скла:</strong> М'яке скло
-                        </p>
-                        <p>
-                            <strong>Товщина:</strong> 1.5мм
-                        </p>
-                        <p>
-                            <strong>Загальна сума:</strong> 199.2 грн
+                            <strong>Загальна сума:</strong> {order.total_price} грн
                         </p>
 
                         <h2>Додаткова інформація</h2>
                         <label>
                             Коментар до замовлення (необов’язково)
-                            <textarea name="comment" placeholder="Введіть коментар"></textarea>
+                            <textarea
+                                name="comments"
+                                placeholder="Введіть коментар"
+                                value={order.comments}
+                                onChange={handleInputChange}
+                            ></textarea>
                         </label>
 
                         <button type="submit" className={styles.submitButton}>
