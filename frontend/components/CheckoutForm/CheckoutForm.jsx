@@ -8,7 +8,7 @@ import Image from "next/image";
 const CheckoutForm = () => {
     const [cityQuery, setCityQuery] = useState("");
     const [suggestedCities, setSuggestedCities] = useState([]);
-    const [postOffices, setPostOffices] = useState([]); // Для відділень
+    const [postOffices, setPostOffices] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [debounceTimeout, setDebounceTimeout] = useState(null);
     const [order, setOrder] = useState({
