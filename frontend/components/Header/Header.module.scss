@@ -1,5 +1,5 @@
-@import './styles/variables.scss';
-@import './styles/container.scss';
+@use './styles/variables' as *;
+@use './styles/container' as *;
 
 .siteHeader {
   display: flex;
@@ -24,15 +24,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
-      .headerLeft {
-        .headerLogo {
-          img {
-            max-height: 50px;
-            width: 100px;
-          }
-        }
-      }
 
       .mainNav {
         display: flex;

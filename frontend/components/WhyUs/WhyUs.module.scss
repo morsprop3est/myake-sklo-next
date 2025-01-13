@@ -1,10 +1,8 @@
-@import './styles/variables.scss';
-@import './styles/container.scss';
-
-
+@use './styles/variables' as *;
+@use './styles/container' as *;
 
 .whyUs {
-  padding: 200px 0 100px;
+  padding: 250 0 100px;
 }
 
 .whyUsWrapper {
@@ -90,10 +88,6 @@
         .whyUsItemHorizontalText {
           font-size: $font-size-16-tablet;
         }
-
-      }
-
-      .whyUsItemVertical {
 
       }
     }

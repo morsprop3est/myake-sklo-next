@@ -11,6 +11,7 @@ const ReviewCard = ({ review }) => {
             alt="Star"
             width={10}
             height={10}
+            loading="lazy"
             className={index < rating ? styles.filledStar : ''}
         />
     ));

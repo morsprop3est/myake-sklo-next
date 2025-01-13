@@ -1,26 +1,56 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import styles from './Header.module.scss';
 
 const Header = () => {
     return (
-        <header className={styles.siteHeader}>
+        <motion.header
+            className={styles.siteHeader}
+            initial={{ opacity: 0, translateY: -200 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ duration: 1.5, type: 'spring', stiffness: 120, damping: 25 }} // Більш пружний ефект
+        >
             <div className={styles.headerInner}>
                 <div className={styles.container}>
                     <div className={styles.headerWrapper}>
-                        <div className={styles.headerLeft}>
+                        <motion.div
+                            className={styles.headerLeft}
+                            initial={{ opacity: 0, translateY: -200 }}
+                            animate={{ opacity: 1, translateY: 0 }}
+                            transition={{
+                                duration: 1.5,
+                                type: 'spring',
+                                stiffness: 120,
+                                damping: 25,
+                                delay: 1.8, 
+                            }}
+                        >
                             <a href="#" className={styles.headerLogo}>
                                 <Image
                                     src="/images/logo.svg"
                                     alt="Logo"
                                     width={100}
-                                    height={100}
+                                    height={50}
+                                    loading="lazy"
                                 />
                             </a>
-                        </div>
-
-                        <nav className={styles.mainNav}>
+                        </motion.div>
+                        <motion.nav
+                            className={styles.mainNav}
+                            initial={{ opacity: 0, translateY: -200 }}
+                            animate={{ opacity: 1, translateY: 0 }}
+                            transition={{
+                                duration: 1.5,
+                                type: 'spring',
+                                stiffness: 120, 
+                                damping: 25, 
+                                delay: 0.8,
+                            }}
+                        >
                             <ul className={styles.navList}>
                                 <li><a href="#main">Головна</a></li>
                                 <li><a href="#advantages">Переваги</a></li>
@@ -29,17 +59,29 @@ const Header = () => {
                                 <li><a href="#reviews">Відгуки</a></li>
                                 <li><a href="#calculator" className={styles.btnCalculator}>Калькулятор</a></li>
                             </ul>
-                        </nav>
+                        </motion.nav>
 
-                        <button className={styles.burgerMenu} aria-label="Menu">
+                        <motion.button
+                            className={styles.burgerMenu}
+                            aria-label="Menu"
+                            initial={{ opacity: 0, translateY: -200 }}
+                            animate={{ opacity: 1, translateY: 0 }}
+                            transition={{
+                                duration: 1.5,
+                                type: 'spring',
+                                stiffness: 120,
+                                damping: 25,
+                                delay: 1.1, // Затримка для кнопки меню
+                            }}
+                        >
                             <span className={styles.burgerLine}></span>
                             <span className={styles.burgerLine}></span>
                             <span className={styles.burgerLine}></span>
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
             </div>
-        </header>
+        </motion.header>
     );
 };
 

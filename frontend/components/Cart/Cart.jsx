@@ -5,76 +5,51 @@ import Link from 'next/link';
 import CartButton from './CartButton';
 import CartItem from './CartItem';
 import styles from './Cart.module.scss';
-import { useCart } from '@/hooks/useCart';
+import useCart from '@/hooks/useCart';
 
 const Cart = () => {
-    const { products, removeItemFromCart, updateItemQuantity, totalPrice, cartCount } = useCart(); 
-
+    const { products, isLoading, addProduct, removeProduct, updateProductQuantity, loadCart } = useCart();
     const [isCartVisible, setIsCartVisible] = useState(false);
-    const [promoCode, setPromoCode] = useState('');
-    const [discount, setDiscount] = useState(0);
-    const [showAll, setShowAll] = useState(false);
 
     const toggleCartVisibility = () => {
+        if (!isCartVisible) loadCart(); 
         setIsCartVisible(!isCartVisible);
     };
 
-    const applyPromoCode = () => {
-        setDiscount(promoCode === 'DISCOUNT10' ? 0.1 : 0);
+    const handleRemoveItem = (productId) => {
+        removeProduct(productId);
     };
 
-
-
-    const totalAmount = products.reduce((total, product) => total + product.price * product.quantity, 0);
-    const discountedAmount = totalAmount * (1 - discount);
-    const displayedProducts = showAll ? products : products.slice(0, 3);
+    const handleUpdateQuantity = (productId, quantity) => {
+        updateProductQuantity(productId, quantity);
+    };
 
     return (
         <div className={styles.cartContainer}>
-            <CartButton itemCount={cartCount} onClick={toggleCartVisibility} />
+            <CartButton itemCount={products.length} onClick={toggleCartVisibility} />
 
             {isCartVisible && (
                 <>
                     <div className={styles.overlay} onClick={toggleCartVisibility}></div>
                     <div className={styles.cartList}>
                         <h3>Ваші товари</h3>
-                        {products.length === 0 ? (
+                        {isLoading ? (
+                            <p>Завантаження...</p>
+                        ) : products.length === 0 ? (
                             <p>Корзина порожня</p>
                         ) : (
-                            displayedProducts.map((product) => (
+                            products.map((product) => (
                                 <CartItem
-                                    key={product.id}
+                                    key={product.product_id}
                                     product={product}
-                                    onRemove={removeItemFromCart}
-                                    onUpdateQuantity={updateItemQuantity}
+                                    onRemove={handleRemoveItem}
+                                    onUpdateQuantity={handleUpdateQuantity}
                                 />
                             ))
                         )}
 
-                        {products.length > 3 && !showAll && (
-                            <button className={styles.viewAllButton} onClick={() => setShowAll(true)}>
-                                Переглянути весь товар
-                            </button>
-                        )}
-
-                        <div className={styles.totalAmount}>
-                            <h4>Загальна сума: {discountedAmount.toFixed(2)}₴</h4>
-                        </div>
-
-                        <div className={styles.promoCode}>
-                            <input
-                                type="text"
-                                placeholder="Введіть промокод"
-                                value={promoCode}
-                                onChange={(e) => setPromoCode(e.target.value)}
-                            />
-                            <button onClick={applyPromoCode}>Застосувати</button>
-                        </div>
-
-                        <Link href="/checkout">
-                            <button className={styles.orderButton}>
-                                Оформити замовлення
-                            </button>
+                        <Link href="/checkout" legacyBehavior>
+                            <a className={styles.orderButton}>Оформити замовлення</a>
                         </Link>
                     </div>
                 </>

@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
 import styles from './FastBuy.module.scss';
 
-const FastBuyCard = ({ imageSrc, title, features, inputValues }) => {
+const FastBuyCard = ({ imageSrc, title, features, inputValues, onInputChange }) => {
     return (
         <div className={styles.fastBuyContainer}>
             <img src={imageSrc} alt=""/>
@@ -21,6 +23,7 @@ const FastBuyCard = ({ imageSrc, title, features, inputValues }) => {
                         min="40"
                         max="400"
                         value={inputValues.length}
+                        onChange={(e) => onInputChange('length', e.target.value)}
                     />
                 </div>
                 <div className={styles.fastBuyTableHeight}>
@@ -32,6 +35,7 @@ const FastBuyCard = ({ imageSrc, title, features, inputValues }) => {
                         min="40"
                         max="400"
                         value={inputValues.width}
+                        onChange={(e) => onInputChange('width', e.target.value)}
                     />
                 </div>
             </div>

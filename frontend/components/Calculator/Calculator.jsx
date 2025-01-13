@@ -1,79 +1,65 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import styles from './Calculator.module.scss';
 import Warning from './Warning';
 import PhotoGrid from './PhotoGrid';
 import CalculatorControl from './CalculatorControl';
-import { calculatePrice } from '@/utils/calculatePrice';
-import { useCart } from '@/hooks/useCart';
+import useCart from '@/hooks/useCart';
 
 const Calculator = () => {
-    const [tableDimensions, setTableDimensions] = useState({
-        width: 60,
-        height: 40,
-        radius: 0,
+    const [product, setProduct] = useState({
+        quantity: 1,
+        dimensions: {
+            width: 120,
+            height: 40,
+            radius: 0,
+            glassType: 'glossy',
+            glassThickness: 'thin',
+            shape: 'rectangle',
+        },
     });
 
-    const [glassType, setGlassType] = useState('glossy');
-    const [glassThickness, setThickness] = useState('thin');
-    const [shape, setShape] = useState('rectangle');
-    const [price, setPrice] = useState({ newPrice: 0, oldPrice: 0 });
-
-    const { addItemToCart } = useCart();
-
-    useEffect(() => {
-        const { newPrice, oldPrice } = calculatePrice(
-            tableDimensions.width,
-            tableDimensions.height,
-            glassType,
-            glassThickness,
-            shape
-        );
-        setPrice({ newPrice, oldPrice });
-    }, [tableDimensions, glassType, glassThickness, shape]);
+    const { addProduct } = useCart();
 
     const handleAddToCart = () => {
-        const product = {
-            id: Date.now(),
-            name: 'М`яке скло',
-            price: price.newPrice,
-            oldPrice: price.oldPrice,
-            quantity: 1,
-            dimensions: tableDimensions,
-            glassType: glassType,
-            glassThickness: glassThickness,
-            shape: shape,
-        };
+        console.log('Add to cart:');
+        console.log(product);
+        addProduct(product);
+    };
 
-        addItemToCart(product);
+    const handleProductChange = (updatedFields) => {
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            dimensions: {
+                ...prevProduct.dimensions,
+                ...updatedFields.dimensions,
+            },
+        }));
+        console.log(product);
     };
 
     return (
-        <section className={styles.calculator}>
+        <motion.section
+            className={styles.calculator}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
             <div className={styles.container}>
                 <Warning />
                 <div className={styles.calculatorWrapper}>
-                    <PhotoGrid
-                        tableDimensions={tableDimensions}
-                        glassType={glassType}
-                        glassThickness={glassThickness}
-                    />
+                    <PhotoGrid product={product} />
                     <CalculatorControl
-                        tableDimensions={tableDimensions}
-                        setTableDimensions={setTableDimensions}
-                        shape={shape}
-                        setShape={setShape}
-                        glassType={glassType}
-                        setGlassType={setGlassType}
-                        glassThickness={glassThickness}
-                        setThickness={setThickness}
-                        price={price}
+                        product={product}
+                        setProduct={setProduct}
                         onAddToCart={handleAddToCart}
                     />
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

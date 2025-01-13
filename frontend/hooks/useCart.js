@@ -1,60 +1,88 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { getCartBySession, addToCart, removeFromCart, updateItemQuantity } from "@/api/cart";
 
-export const useCart = () => {
-    const [products, setProducts] = useState(() => {
-        const savedCart = localStorage.getItem('cart');
-        return savedCart ? JSON.parse(savedCart) : [];
-    });
+const useCart = () => {
+    const sessionKey = "user_session";
+    const [sessionId, setSessionId] = useState(null);
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        if (products.length > 0) {
-            localStorage.setItem('cart', JSON.stringify(products));
-        }
-    }, [products]);
-
-    const addItemToCart = (product) => {
-        setProducts((prevProducts) => {
-            const existingProduct = prevProducts.find((prod) => prod.id === product.id);
-            if (existingProduct) {
-                return prevProducts.map((prod) =>
-                    prod.id === product.id
-                        ? { ...prod, quantity: prod.quantity + 1 }
-                        : prod
-                );
-            }
-            return [...prevProducts, { ...product, quantity: 1 }];
+    const generateSessionId = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
         });
     };
 
-    const removeItemFromCart = (product) => {
-        setProducts((prevProducts) =>
-            prevProducts.filter((prod) => prod.id !== product.id)
-        );
+    const initSession = () => {
+        let session = localStorage.getItem(sessionKey);
+        if (!session) {
+            session = generateSessionId();
+            localStorage.setItem(sessionKey, session);
+        }
+        setSessionId(session);
+        return session;
     };
 
-    const updateItemQuantity = (product, newQuantity) => {
-        setProducts((prevProducts) =>
-            prevProducts.map((prod) =>
-                prod.id === product.id
-                    ? { ...prod, quantity: newQuantity }
-                    : prod
-            )
-        );
+    const loadCart = async () => {
+        setIsLoading(true);
+        try {
+            const session = sessionId || initSession();
+            const { products } = await getCartBySession(session);
+            setProducts(products || []);
+        } catch (error) {
+            console.error("Error loading cart:", error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const calculateTotalPrice = () => {
-        return products.reduce(
-            (total, product) => total + product.price * product.quantity,
-            0
-        );
+    const addProduct = async (product) => {
+        try {
+            const session = sessionId || initSession();
+            const updatedProducts = await addToCart(session, product);
+            setProducts(updatedProducts.products); 
+        } catch (error) {
+            console.error("Error adding product to cart:", error);
+        }
     };
+
+    const removeProduct = async (productId) => {
+        try {
+            const session = sessionId || initSession();
+            const updatedCart = await removeFromCart(session, productId);
+            setProducts(updatedCart.products);
+        } catch (error) {
+            console.error("Error removing product:", error);
+        }
+    };
+    
+
+    const updateProductQuantity = async (productId, quantity) => {
+        try {
+            const session = sessionId || initSession();
+            const updatedCart = await updateItemQuantity(session, productId, quantity);
+            setProducts(updatedCart.products);
+        } catch (error) {
+            console.error("Error updating product quantity:", error);
+        }
+    };
+    
+
+    useEffect(() => {
+        initSession();
+        loadCart();
+    }, []);
 
     return {
+        sessionId,
         products,
-        addItemToCart,
-        removeItemFromCart,
-        updateItemQuantity,
-        totalPrice: calculateTotalPrice(),
-        cartCount: products.length,
+        isLoading,
+        addProduct,
+        removeProduct,
+        updateProductQuantity,
+        loadCart,
     };
 };
+
+export default useCart;

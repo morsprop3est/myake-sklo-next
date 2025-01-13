@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Calculator.module.scss';
 
-const PhotoGrid = ({ tableDimensions, glassType, glassThickness }) => {
-    const { width, height, radius } = tableDimensions;
+const PhotoGrid = ({ product }) => {
+    const { width, height, radius, glassType, glassThickness } = product.dimensions; // Зчитуємо з dimensions
 
     const shapeStyles = {
         width: `${width}px`,

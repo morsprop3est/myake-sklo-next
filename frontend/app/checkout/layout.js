@@ -1,6 +1,4 @@
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-import ConsentBanner from "@/components/ConsentBanner/ConsentBanner";
+import { CartProvider } from '@/context/cartProvider';
 
 export const metadata = {
     title: "Оформлення замовлення",
@@ -9,9 +7,12 @@ export const metadata = {
 
 export default function CheckoutLayout({ children }) {
     return (
-        <div>
-            <ConsentBanner />
-            <main>{children}</main>
-        </div>
+        <html lang="ua">
+            <body>
+            <CartProvider>
+                    {children}
+                </CartProvider>
+            </body>
+        </html>
     );
 }

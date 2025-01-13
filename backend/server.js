@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
-const router = express.Router();
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -15,11 +16,21 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(session({
+    secret: 'test',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 7 дней
+    store: new SequelizeStore({
+        db: sequelize,
+    }),
+}));
+
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api/cities", cityRoutes);
-app.use("/api/cart", cartRoutes);
+app.use("/api/carts", cartRoutes);
 app.use("/api/order", orderRoutes);
 app.use("/api/post-office", postOfficeRoutes);
 

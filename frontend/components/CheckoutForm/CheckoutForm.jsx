@@ -6,8 +6,10 @@ import { fetchPostOffices } from "@/api/postOffices";
 import { submitOrder } from "@/api/order";
 import styles from "./CheckoutForm.module.scss";
 import Image from "next/image";
+import useCart from '@/hooks/useCart';
 
 const CheckoutForm = () => {
+    const { loadCartFromLocalStorage, syncCartWithBackend, getSession } = useCart();
     const [cityQuery, setCityQuery] = useState("");
     const [suggestedCities, setSuggestedCities] = useState([]);
     const [postOffices, setPostOffices] = useState([]);
@@ -27,16 +29,20 @@ const CheckoutForm = () => {
         payment_type: "",
         payment_status: "not_paid",
         delivery_type: "",
-        comments: ""
+        comments: "",
+        session_id: "" 
     });
 
     useEffect(() => {
-        const cartProducts = JSON.parse(localStorage.getItem('cart')) || [];
+        syncCartWithBackend();
+        const cartProducts = loadCartFromLocalStorage();
         const totalPrice = cartProducts.reduce((total, product) => total + product.price * product.quantity, 0);
+        const session_id = getSession();
         setOrder((prevOrder) => ({
             ...prevOrder,
             products: cartProducts,
-            total_price: totalPrice
+            total_price: totalPrice,
+            session_id 
         }));
     }, []);
 
@@ -105,8 +111,7 @@ const CheckoutForm = () => {
                 newOrder.delivery_type = value === "prepayment" ? "pickup" : "nova_poshta";
             }
             return newOrder;
-        })
-        console.log(order);
+        });
     };
 
     return (
@@ -205,6 +210,7 @@ const CheckoutForm = () => {
                                 className={styles.deliveryPhoto}
                                 width={50}
                                 height={50}
+                                loading="lazy"
                             />
                             <h2>Дані доставки</h2>
                         </div>

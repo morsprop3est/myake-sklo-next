@@ -1,6 +1,5 @@
 import { CartProvider } from '@/context/cartProvider';
 import "./globals.scss";
-import ConsentBanner from "@/components/ConsentBanner/ConsentBanner";
 
 export const metadata = {
     title: "М`яке скло",
@@ -9,9 +8,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en">
+        <html lang="ua">
             <body>
-            <ConsentBanner/>
             <CartProvider>
                     {children}
                 </CartProvider>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from '../Calculator.module.scss';
 
-const GlassType = ({ glassType, setGlassType, glassThickness }) => {
+const GlassType = ({ product, setProduct }) => {
     const glassTypeOptions = [
         { label: 'Глянцеве', value: 'glossy' },
         { label: 'Рифлене', value: 'ribbed' },
@@ -9,12 +9,12 @@ const GlassType = ({ glassType, setGlassType, glassThickness }) => {
     ];
 
     useEffect(() => {
-        if (glassThickness === 'thick' && glassType !== 'glossy') {
-            setGlassType('glossy');
+        if (product.dimensions.glassThickness === 'thick' && product.dimensions.glassType !== 'glossy') {
+            setProduct({ ...product, dimensions: { ...product.dimensions, glassType: 'glossy' } });
         }
-    }, [glassThickness, glassType, setGlassType]);
+    }, [product.dimensions.glassThickness, product.dimensions.glassType, setProduct]);
 
-    const isGlossyOnly = glassThickness === 'thick';
+    const isGlossyOnly = product.dimensions.glassThickness === 'thick';
 
     return (
         <div className={styles.calculatorItemWrapper}>
@@ -35,8 +35,8 @@ const GlassType = ({ glassType, setGlassType, glassThickness }) => {
                                 name="glassType"
                                 value={value}
                                 id={`glass-${value}`}
-                                checked={glassType === value}
-                                onChange={() => setGlassType(value)}
+                                checked={product.dimensions.glassType === value}
+                                onChange={() => setProduct({ ...product, dimensions: { ...product.dimensions, glassType: value } })}
                                 disabled={isDisabled}
                             />
                             <label htmlFor={`glass-${value}`} className={isDisabled ? styles.disabled : ''}>

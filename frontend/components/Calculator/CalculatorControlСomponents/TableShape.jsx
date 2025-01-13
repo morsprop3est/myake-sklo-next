@@ -1,13 +1,30 @@
 import React from 'react';
 import styles from '../Calculator.module.scss';
 
-const TableShape = ({ shape, setShape }) => {
+const TableShape = ({ product, setProduct }) => {
     const shapeOptions = [
-        { label: 'Прямокутник', value: 'rectangle' },
-        { label: 'Круг', value: 'round' },
-        { label: 'Овал', value: 'oval' },
-        { label: 'Зі скругленням', value: 'rounded' },
+        { label: 'Прямокутник', value: 'rectangle', width: 60, height: 40, radius: 0 },
+        { label: 'Круг', value: 'round', width: 40, width: 100, height: 100, radius: 50 },
+        { label: 'Овал', value: 'oval', width: 100, width: 60, height: 40, radius: 25 },
+        { label: 'Зі скругленням', value: 'rounded', width: 60, height: 40, radius: 25 },
     ];
+
+    const handleShapeChange = (shapeValue) => {
+        const selectedShape = shapeOptions.find(option => option.value === shapeValue);
+
+        if (selectedShape) {
+            setProduct((prevProduct) => ({
+                ...prevProduct,
+                dimensions: {
+                    ...prevProduct.dimensions,
+                    shape: shapeValue,
+                    width: selectedShape.width,
+                    height: selectedShape.height,
+                    radius: selectedShape.radius,
+                },
+            }));
+        }
+    };
 
     return (
         <div className={styles.calculatorItemWrapper}>
@@ -22,8 +39,8 @@ const TableShape = ({ shape, setShape }) => {
                             name="shape"
                             value={value}
                             id={`shape-${value}`}
-                            checked={shape === value}
-                            onChange={() => setShape(value)}
+                            checked={product.dimensions.shape === value}
+                            onChange={() => handleShapeChange(value)}
                         />
                         <label htmlFor={`shape-${value}`}>
                             <span className={styles.shapeRadio}>

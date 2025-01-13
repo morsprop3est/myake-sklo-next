@@ -1,8 +1,12 @@
 import React from 'react';
 import styles from '../Calculator.module.scss';
 
-const GlassThickness = ({ glassThickness, setThickness }) => {
+const GlassThickness = ({ product, setProduct }) => {
     const thicknessOptions = ['thin', 'thick'];
+
+    const handleThicknessChange = (thickness) => {
+        setProduct({ ...product, dimensions: { ...product.dimensions, glassThickness: thickness } });
+    };
 
     return (
         <div className={styles.calculatorItemWrapper}>
@@ -17,8 +21,8 @@ const GlassThickness = ({ glassThickness, setThickness }) => {
                             name="glassThickness"
                             value={thickness}
                             id={`thickness-${thickness}`}
-                            checked={glassThickness === thickness}
-                            onChange={() => setThickness(thickness)}
+                            checked={product.dimensions.glassThickness === thickness}
+                            onChange={() => handleThicknessChange(thickness)}
                         />
                         <label htmlFor={`thickness-${thickness}`}>
                             <span className={styles.shapeRadio}>{thickness === 'thin' ? '1.5мм' : '2мм'}</span>

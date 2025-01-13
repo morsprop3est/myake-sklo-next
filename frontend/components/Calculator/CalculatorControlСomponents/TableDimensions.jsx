@@ -1,7 +1,23 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+
+import React, { useEffect, useState, useCallback } from 'react';
 import styles from '../Calculator.module.scss';
 
-const TableDimensions = ({ tableDimensions = { width: 60, height: 40, radius: 15 }, setTableDimensions, shape }) => {
+const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), delay);
+    };
+};
+
+const TableDimensions = ({ product, setProduct }) => {
+    const [localDimensions, setLocalDimensions] = useState({
+        width: product.dimensions.width || 40,
+        height: product.dimensions.height || 40,
+        radius: product.dimensions.radius || 0,
+    });
+
     const [radiusMax, setRadiusMax] = useState(100);
     const [showRadius, setShowRadius] = useState(false);
     const [showLengthWidth, setShowLengthWidth] = useState(true);
@@ -9,68 +25,69 @@ const TableDimensions = ({ tableDimensions = { width: 60, height: 40, radius: 15
     const minDimension = 40;
     const maxDimension = 200;
 
-    const handleDimensionChange = (type, value) => {
-        if (value < minDimension && type !== 'radius') value = minDimension;
-        if (value > maxDimension) value = maxDimension;
+    // Дебаунс для оновлення продукту
+    const debouncedUpdateProduct = useCallback(
+        debounce((dimensions) => {
+            setProduct((prevProduct) => {
+                const updatedDimensions = { ...prevProduct.dimensions, ...dimensions };
 
-        if (type === 'radius') {
-            if (value < 0) value = 0;
-            if (value > radiusMax) value = radiusMax;
-        }
+                // Перевірка мінімальних та максимальних значень
+                if (updatedDimensions.width < minDimension) updatedDimensions.width = minDimension;
+                if (updatedDimensions.width > maxDimension) updatedDimensions.width = maxDimension;
 
-        setTableDimensions((prev) => {
-            const updatedDimensions = { ...prev, [type]: value };
+                if (updatedDimensions.height < minDimension) updatedDimensions.height = minDimension;
+                if (updatedDimensions.height > maxDimension) updatedDimensions.height = maxDimension;
 
-            if (shape === 'round' && type === 'radius') {
-                updatedDimensions.width = value * 2;
-                updatedDimensions.height = value * 2;
-            }
+                if (updatedDimensions.radius < 0) updatedDimensions.radius = 0;
+                if (updatedDimensions.radius > radiusMax) updatedDimensions.radius = radiusMax;
 
-            return updatedDimensions;
-        });
-    };
+                // Оновлення width/height для круглої форми
+                if (prevProduct.dimensions.shape === 'round' && dimensions.radius !== undefined) {
+                    updatedDimensions.width = dimensions.radius * 2;
+                    updatedDimensions.height = dimensions.radius * 2;
+                }
 
-    const handleInputChange = (type) => (e) => {
-        const value = Number(e.target.value);
-        handleDimensionChange(type, value);
+                return { ...prevProduct, dimensions: updatedDimensions };
+            });
+        }, 100),
+        [setProduct, radiusMax]
+    );
+
+    const handleDimensionChange = (key, value) => {
+        setLocalDimensions((prev) => ({ ...prev, [key]: value }));
+        debouncedUpdateProduct({ [key]: value });
     };
 
     useEffect(() => {
-        if (shape === 'rounded') {
-            const minSide = Math.min(tableDimensions.width || 0, tableDimensions.height || 0);
+        if (product.dimensions.shape === 'rounded') {
+            const minSide = Math.min(product.dimensions.width || 0, product.dimensions.height || 0);
             setRadiusMax(minSide / 2);
         }
-    }, [tableDimensions.width, tableDimensions.height, shape]);
+    }, [product.dimensions.width, product.dimensions.height, product.dimensions.shape]);
 
     useEffect(() => {
-        switch (shape) {
+        switch (product.dimensions.shape) {
             case 'rectangle':
                 setShowRadius(false);
                 setShowLengthWidth(true);
-                setTableDimensions({ width: 60, height: 40, radius: 0 });
                 break;
             case 'oval':
                 setShowRadius(false);
                 setShowLengthWidth(true);
-                setTableDimensions({ width: 60, height: 40, radius: 15 });
                 break;
             case 'round':
                 setShowRadius(true);
                 setShowLengthWidth(false);
-                setRadiusMax(100);
-                setTableDimensions({ width: 100, height: 100, radius: 50 });
                 break;
             case 'rounded':
                 setShowRadius(true);
                 setShowLengthWidth(true);
-                setTableDimensions({ width: 60, height: 40, radius: 15 });
                 break;
             default:
-                setShowRadius(false);
-                setShowLengthWidth(true);
-                setTableDimensions({ width: 60, height: 40, radius: 0 });
+                console.error('Невідомий тип форми:', product.dimensions.shape);
+                break;
         }
-    }, [shape]);
+    }, [product.dimensions.shape]);
 
     return (
         <div className={styles.calculatorItemWrapper}>
@@ -84,30 +101,34 @@ const TableDimensions = ({ tableDimensions = { width: 60, height: 40, radius: 15
                             <h6>Довжина</h6>
                             <input
                                 type="number"
-                                value={tableDimensions?.width || minDimension}
-                                onChange={handleInputChange('width')}
+                                value={localDimensions.width}
+                                onChange={(e) => handleDimensionChange('width', Number(e.target.value))}
+                                min={minDimension}
+                                max={maxDimension}
                             />
                             <input
                                 type="range"
-                                value={tableDimensions?.width || minDimension}
+                                value={localDimensions.width}
                                 min={minDimension}
                                 max={maxDimension}
-                                onChange={handleInputChange('width')}
+                                onChange={(e) => handleDimensionChange('width', Number(e.target.value))}
                             />
                         </div>
                         <div className={styles.tableHeight}>
                             <h6>Ширина</h6>
                             <input
                                 type="number"
-                                value={tableDimensions?.height || minDimension}
-                                onChange={handleInputChange('height')}
+                                value={localDimensions.height}
+                                onChange={(e) => handleDimensionChange('height', Number(e.target.value))}
+                                min={minDimension}
+                                max={maxDimension}
                             />
                             <input
                                 type="range"
-                                value={tableDimensions?.height || minDimension}
+                                value={localDimensions.height}
                                 min={minDimension}
                                 max={maxDimension}
-                                onChange={handleInputChange('height')}
+                                onChange={(e) => handleDimensionChange('height', Number(e.target.value))}
                             />
                         </div>
                     </>
@@ -117,15 +138,17 @@ const TableDimensions = ({ tableDimensions = { width: 60, height: 40, radius: 15
                         <h6>Довжина заокруглення</h6>
                         <input
                             type="number"
-                            value={tableDimensions?.radius || 0}
-                            onChange={handleInputChange('radius')}
+                            value={localDimensions.radius}
+                            onChange={(e) => handleDimensionChange('radius', Number(e.target.value))}
+                            min="0"
+                            max={radiusMax}
                         />
                         <input
                             type="range"
-                            value={tableDimensions?.radius || 0}
+                            value={localDimensions.radius}
                             min="0"
                             max={radiusMax}
-                            onChange={handleInputChange('radius')}
+                            onChange={(e) => handleDimensionChange('radius', Number(e.target.value))}
                         />
                     </div>
                 )}
