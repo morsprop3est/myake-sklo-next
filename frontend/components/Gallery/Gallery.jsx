@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './Gallery.module.scss';
+import { motion } from 'framer-motion';
 import galleryData from '@/data/galleryData';
 
 const Gallery = () => {
@@ -28,18 +29,33 @@ const Gallery = () => {
     };
 
     return (
-        <div className={styles.gallery}>
+        <motion.div
+            className={styles.gallery}
+            initial={{ opacity: 0, y: 100 }} // Початковий стан
+            whileInView={{ opacity: 1, y: 0 }} // Стан, коли компонент у полі зору
+            viewport={{ once: true, amount: 0.2 }} // Анімація лише один раз при скролі
+            transition={{ duration: 0.8 }} // Тривалість анімації
+        >
             <div className={styles.container}>
                 <div className={styles.galleryHeader}>
-                    <h2>
-                        Галерея
-                    </h2>
+                    <h2>Галерея</h2>
                 </div>
                 <div className={styles.galleryGrid}>
-                    {galleryData.map((image) => (
-                        <div key={image.id} className={styles.galleryItem} onClick={() => handleImageClick(image)}>
+                    {galleryData.map((image, index) => (
+                        <motion.div
+                            key={image.id}
+                            className={styles.galleryItem}
+                            onClick={() => handleImageClick(image)}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{
+                                duration: 0.5,
+                                delay: index * 0.2, // Затримка на основі індексу
+                            }}
+                            viewport={{ once: true }} // Анімація лише один раз при скролі
+                        >
                             <img src={image.url} alt={image.comment} />
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
                 {selectedImage && (
@@ -53,7 +69,7 @@ const Gallery = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 };
 

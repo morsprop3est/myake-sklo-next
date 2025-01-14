@@ -1,11 +1,18 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './FastBuy.module.scss';
 
-const FastBuyCard = ({ imageSrc, title, features, inputValues, onInputChange }) => {
+const FastBuyCard = ({ imageSrc, title, features, inputValues, onInputChange, index }) => {
     return (
-        <div className={styles.fastBuyContainer}>
+        <motion.div
+            className={styles.fastBuyContainer}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: index * 0.2 }}
+        >
             <img src={imageSrc} alt=""/>
             <h5>{title}</h5>
             <ul>
@@ -40,7 +47,7 @@ const FastBuyCard = ({ imageSrc, title, features, inputValues, onInputChange }) 
                 </div>
             </div>
             <button className={styles.mainButton}>Додати до кошика</button>
-        </div>
+        </motion.div>
     );
 };
 

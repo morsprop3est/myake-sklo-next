@@ -10,6 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="ua">
+            <head>
+                <link
+                    href="https://cdn.jsdelivr.net/gh/Alaev-Co/snowflakes/dist/snow.min.css"
+                    rel="stylesheet"
+                />
+            </head>
             <CartProvider>
                 <body>{children}</body>
             </CartProvider>

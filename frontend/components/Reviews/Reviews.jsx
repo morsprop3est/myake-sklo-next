@@ -1,4 +1,3 @@
-// components/Reviews.js
 import React from 'react';
 import ReviewCard from './ReviewCard';
 import reviewsData from '@/data/reviewData.json';
@@ -13,7 +12,7 @@ const Reviews = () => {
                 </h2>
                 <div className={styles.reviewsWrapper}>
                     {reviewsData.map((review, index) => (
-                        <ReviewCard key={index} review={review} />
+                        <ReviewCard key={index} review={review} index={index} />
                     ))}
                 </div>
             </div>

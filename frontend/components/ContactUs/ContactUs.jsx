@@ -1,10 +1,21 @@
+'use client'
+
 import React from 'react';
 import Image from 'next/image';
+import { FaViber, FaTelegramPlane, FaInstagram } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 import styles from './ContactUs.module.scss';
 
 const ContactUs = () => {
     return (
-        <section className={styles.contactUs} id="contact-us">
+        <motion.section
+            className={styles.contactUs}
+            id="contact-us"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
             <div className={styles.container}>
                 <div className={styles.contactUsWrapper}>
                     <div className={styles.contactUsPart1}>
@@ -69,17 +80,23 @@ const ContactUs = () => {
                             </div>
                             <div className={styles.contactUsItemExtended}>
                                 <h6>Соціальні мережі</h6>
-                                <div>
-                                    <div className={styles.contactUsRoundedButton}></div>
-                                    <div className={styles.contactUsRoundedButton}></div>
-                                    <div className={styles.contactUsRoundedButton}></div>
+                                <div className={styles.contactUsRoundedButtonWrapper}>
+                                    <div className={styles.contactUsRoundedButton}>
+                                        <FaViber style={{ fontSize: '1.5rem', color: '#7360f2' }} />
+                                    </div>
+                                    <div className={styles.contactUsRoundedButton}>
+                                        <FaTelegramPlane  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
+                                    </div>
+                                    <div className={styles.contactUsRoundedButton}>
+                                        <FaInstagram  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

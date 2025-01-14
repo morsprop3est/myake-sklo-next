@@ -1,10 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { FaArrowDown } from "react-icons/fa";
 import styles from './Main.module.scss';
 
 const Main = () => {
+    const [isShaking, setIsShaking] = useState(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsShaking(true);
+            setTimeout(() => setIsShaking(false), 1000); 
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <section className={styles.main} id="main">
             <motion.div
@@ -77,7 +89,7 @@ const Main = () => {
                     <div className={styles.mainPart2Wrapper}>
                         <a href="#calculator">
                             <motion.div
-                                className={styles.mainButton}
+                                className={`${styles.mainButton} ${isShaking ? styles.shake : ''}`}
                                 initial={{ opacity: 0, translateY: 20 }}
                                 animate={{ opacity: 1, translateY: 0 }}
                                 transition={{ duration: 1, ease: 'easeOut', delay: 2 }}
@@ -86,6 +98,18 @@ const Main = () => {
                             </motion.div>
                         </a>
                     </div>
+                    <motion.div
+                        className={styles.mainArrow}
+                        initial={{ opacity: 0, y: 0 }} 
+                        animate={{ opacity: 1, y: [0, 20, 0] }}
+                        transition={{
+                            opacity: { delay: 2, duration: 1 }, 
+                            y: { delay: 1, duration: 1.5, repeat: Infinity, ease: "easeInOut" } 
+                        }}
+                    >
+                        <FaArrowDown style={{ fontSize: '2rem', color: '#7360f2' }} />
+                    </motion.div>
+
                 </div>
             </div>
         </section>

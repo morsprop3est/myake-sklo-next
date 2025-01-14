@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaViber, FaTelegramPlane, FaInstagram } from 'react-icons/fa';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
@@ -49,9 +50,15 @@ const Footer = () => {
                                     <p>myagkoyesteklo@gmail.com</p>
                                 </div>
                                 <div className={styles.footerRightButtons}>
-                                    <div className={styles.roundedButton}></div>
-                                    <div className={styles.roundedButton}></div>
-                                    <div className={styles.roundedButton}></div>
+                                    <div className={styles.contactUsRoundedButton}>
+                                        <FaViber style={{ fontSize: '1.5rem', color: '#7360f2' }} />
+                                    </div>
+                                    <div className={styles.contactUsRoundedButton}>
+                                        <FaTelegramPlane  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
+                                    </div>
+                                    <div className={styles.contactUsRoundedButton}>
+                                        <FaInstagram  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
+                                    </div>
                                     <button className={styles.btnCalculator}>Калькулятор</button>
                                 </div>
                             </div>

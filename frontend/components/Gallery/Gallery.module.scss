@@ -36,7 +36,7 @@
                 width: 100%;
                 height: auto;
                 display: block;
-                border-radius: 5px;
+                border-radius: 2px;
 
             }
         }
@@ -93,7 +93,7 @@
 
 @media (min-width: 601px) and (max-width: 1024px) {
     .gallery .container .galleryGrid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 

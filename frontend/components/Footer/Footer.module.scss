@@ -74,6 +74,24 @@
 .footerRightButtons {
   display: flex;
   gap: 20px;
+
+  .contactUsRoundedButton {
+    width: 50px;
+    height: 50px;
+    background-color: #222831;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    svg {
+      font-size: 1.5rem;
+      stroke: #fff;
+      fill: #fff;
+    }
+  }
 }
 
 
@@ -82,7 +100,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-
 
     .footerRightItem {
       display: flex;
@@ -105,7 +122,9 @@
     background-color: #222831;
   }
   .btnCalculator {
-    padding: 10px 20px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-family: 'Montserrat Alternates', sans-serif;
     background-color: #222831;
     color: white;
     border: none;

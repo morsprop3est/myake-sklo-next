@@ -161,13 +161,28 @@
         }
       }
 
-      .contactUsRoundedButton {
-        width: 40px;
-        height: 40px;
-        background-color: #e2ae53;
-        border-radius: 50%;
-        display: inline-block;
-        box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+      .contactUsRoundedButtonWrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .contactUsRoundedButton {
+          width: 50px;
+          height: 50px;
+          background-color: #e2ae53;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+
+          svg {
+            font-size: 1.5rem;
+            stroke: #222831;
+            fill: #222831;
+          }
+        }
       }
     }
   }
@@ -177,5 +192,4 @@
 }
 
 @media (max-width: 601px) {
-
 }
