@@ -1,3 +1,4 @@
+// CheckoutLayout.js
 import { CartProvider } from '@/context/cartProvider';
 
 export const metadata = {
@@ -7,12 +8,8 @@ export const metadata = {
 
 export default function CheckoutLayout({ children }) {
     return (
-        <html lang="ua">
-            <body>
-            <CartProvider>
-                    {children}
-                </CartProvider>
-            </body>
-        </html>
+        <CartProvider>
+            {children}
+        </CartProvider>
     );
 }

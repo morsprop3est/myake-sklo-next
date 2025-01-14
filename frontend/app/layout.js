@@ -1,5 +1,6 @@
+// RootLayout.js
 import { CartProvider } from '@/context/cartProvider';
-import "./globals.scss";
+import './globals.scss';
 
 export const metadata = {
     title: "М`яке скло",
@@ -9,11 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="ua">
-            <body>
             <CartProvider>
-                    {children}
-                </CartProvider>
-            </body>
+                <body>{children}</body>
+            </CartProvider>
         </html>
     );
 }

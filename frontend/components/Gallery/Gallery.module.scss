@@ -1,6 +1,104 @@
+@use './styles/variables' as *;
+@use './styles/container' as *;
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .container {
+        .galleryHeader {
+            h2 {
+                margin: 0;
+                text-align: center;
+                font-size: 32px;
+                font-weight: 400;
+                padding: 100px 0;
+            }
+        }
+
+        .galleryGrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .galleryItem {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            cursor: pointer;
+            border-radius: 5px;
+
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 5px;
+
+            }
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+
+            .lightboxContent {
+                position: relative;
+    
+
+                .closeButton,
+                .prevButton,
+                .nextButton {
+                    position: absolute;
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 3rem; 
+                    width: 100px;
+                    height: 100px;
+                    cursor: pointer;
+                }
+
+                .closeButton {
+                    top: -100px;
+                    right: -100px;
+                }
+
+                .prevButton {
+                    left: -100px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                .nextButton {
+                    right: -100px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: 601px) and (max-width: 1024px) {
+    .gallery .container .galleryGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 601px) {
-  
+    .gallery .container .galleryGrid {
+        grid-template-columns: 1fr;
+    }
 }

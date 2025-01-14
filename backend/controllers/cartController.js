@@ -45,15 +45,24 @@ exports.addToCart = async (req, res) => {
 
 exports.getCartBySession = async (req, res) => {
     try {
-        const cart = await Cart.findOne({ where: { session_id: req.params.session_id } });
+        const { session_id } = req.params;
+
+        let cart = await Cart.findOne({ where: { session_id } });
+
         if (!cart) {
-            return res.status(404).json({ message: "Cart not found" });
+            cart = await Cart.create({
+                session_id,
+                products: [],
+                total_price: 0,
+            });
         }
+
         res.status(200).json(cart);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 exports.removeFromCart = async (req, res) => {
     try {

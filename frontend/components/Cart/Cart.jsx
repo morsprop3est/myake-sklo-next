@@ -48,8 +48,8 @@ const Cart = () => {
                             ))
                         )}
 
-                        <Link href="/checkout" legacyBehavior>
-                            <a className={styles.orderButton}>Оформити замовлення</a>
+                        <Link href="/checkout" className={styles.orderButton}>
+                            Оформити замовлення
                         </Link>
                     </div>
                 </>

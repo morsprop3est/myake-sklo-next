@@ -5,11 +5,12 @@ import { fetchCities } from "@/api/cities";
 import { fetchPostOffices } from "@/api/postOffices";
 import { submitOrder } from "@/api/order";
 import styles from "./CheckoutForm.module.scss";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import useCart from '@/hooks/useCart';
 
 const CheckoutForm = () => {
-    const { loadCartFromLocalStorage, syncCartWithBackend, getSession } = useCart();
+    const { sessionId, products, loadCart } = useCart();
     const [cityQuery, setCityQuery] = useState("");
     const [suggestedCities, setSuggestedCities] = useState([]);
     const [postOffices, setPostOffices] = useState([]);
@@ -30,21 +31,17 @@ const CheckoutForm = () => {
         payment_status: "not_paid",
         delivery_type: "",
         comments: "",
-        session_id: "" 
+        session_id: null 
     });
 
     useEffect(() => {
-        syncCartWithBackend();
-        const cartProducts = loadCartFromLocalStorage();
-        const totalPrice = cartProducts.reduce((total, product) => total + product.price * product.quantity, 0);
-        const session_id = getSession();
         setOrder((prevOrder) => ({
             ...prevOrder,
-            products: cartProducts,
-            total_price: totalPrice,
-            session_id 
+            products,
+            total_price: products.reduce((sum, product) => sum + product.price * product.quantity, 0),
+            session_id: sessionId
         }));
-    }, []);
+    }, [products]);
 
     const handleCityInputChange = (e) => {
         const query = e.target.value;
@@ -98,6 +95,7 @@ const CheckoutForm = () => {
         e.preventDefault();
         try {
             await submitOrder(order);
+            router.push('/');
         } catch (error) {
             console.error(error);
         }
@@ -111,7 +109,8 @@ const CheckoutForm = () => {
                 newOrder.delivery_type = value === "prepayment" ? "pickup" : "nova_poshta";
             }
             return newOrder;
-        });
+        })
+        console.log(order);
     };
 
     return (
@@ -210,7 +209,6 @@ const CheckoutForm = () => {
                                 className={styles.deliveryPhoto}
                                 width={50}
                                 height={50}
-                                loading="lazy"
                             />
                             <h2>Дані доставки</h2>
                         </div>

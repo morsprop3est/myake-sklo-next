@@ -7,23 +7,27 @@ const cartService = require("../services/cartServices");
 exports.createOrder = async (req, res) => {
     const { session_id, products, total_price, ...orderDetails } = req.body;
 
+    if (!session_id) {
+        return res.status(400).send("session_id is required");
+    }
+
     try {
         const newOrder = await Order.create({
             session_id,
             products,
             total_price,
-            ...orderDetails
+            ...orderDetails,
         });
 
         await cartService.clearCartBySessionId(session_id);
+        await sendOrderToKeyCRM(newOrder);
 
-        res.status(201).json(newOrder);
     } catch (error) {
         console.error("Error creating order:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).send("Internal Server Error");
     }
 };
-;
+
 
 exports.getOrderById = async (req, res) => {
     try {
