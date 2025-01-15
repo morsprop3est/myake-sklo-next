@@ -74,12 +74,11 @@
 
   .mainPart2 {
     width: 100%;
-    height: 300px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 100px 0;
 
     .mainPart2Wrapper {
       width: 50%;
@@ -112,7 +111,10 @@
     }
 
     .mainArrow {
-      margin-top: 100px;
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -134,45 +136,49 @@
 
   @media (min-width: 601px) and (max-width: 1024px) {
     .mainPart1 {
-      height: 400px;
+      height: 500px;
       box-shadow: rgba(0, 0, 0, 0.35) 0px -20px 36px -28px inset;
 
       .mainPart1Wrapper {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        padding-top: 150px;
-        padding-left: 0;
+        align-items: left;
+        padding-left: 20px;
 
         .mainH1 {
           font-size: $font-size-32-tablet;
-          max-width: 500px;
-          text-align: center;
+          max-width: clamp(300px, 75%, 600px); 
+          text-align: left;
           margin: 10px;
+          font-weight: 500;
         }
 
         .mainP {
           font-size: $font-size-20-tablet;
-          max-width: 500px;
-          text-align: center;
+          font-weight: 400;
+          max-width: clamp(300px, 50%, 600px); 
+          text-align: left;
           margin: 10px;
         }
       }
 
       .mainImageWrapper {
+        width: 400px;
         img {
-          display: none;
+          padding-top: 100px;
+          width: 400px;
         }
       }
 
       .mainDecoration1 img,
       .mainDecoration2 img {
-        height: 400px;
+        height: 500px;
       }
     }
 
     .mainPart2 {
+      height: 400px;
       .mainArrow {
         display: flex;
         flex-direction: row;

@@ -29,7 +29,6 @@ const WhatWeOffer = () => {
                     впливу високих температур, зберігаючи їх первинний вигляд і продовжуючи термін служби.
                 </motion.div>
                 <div className={styles.whatWeOfferItemWrapper}>
-                    {/* First block */}
                     <motion.div
                         className={styles.whatWeOfferItem}
                         initial={{ opacity: 0, translateY: 20 }}
@@ -58,7 +57,6 @@ const WhatWeOffer = () => {
                                 <li>Стійкий до подряпин, вологи та плям, не деформується та не вздувається</li>
                             </ul>
                         </motion.div>
-
                         <motion.div
                             className={styles.whatWeOfferVerticalItem}
                             initial={{ opacity: 0, translateY: 20 }}
@@ -80,7 +78,6 @@ const WhatWeOffer = () => {
                         </motion.div>
                     </motion.div>
 
-                    {/* Middle image */}
                     <motion.div
                         className={`${styles.whatWeOfferItem} ${styles.whatWeOfferItem1Order}`}
                         initial={{ opacity: 0 }}
@@ -91,13 +88,12 @@ const WhatWeOffer = () => {
                         <Image
                             src="/images/what-we-offer-main-photo.png"
                             alt="logo"
-                            height={580}
-                            width={600}
-                            loading="lazy"
+                            width={580}
+                            height={600}
+                            className={styles.mainImage}
+                            priority
                         />
                     </motion.div>
-
-                    {/* Second block */}
                     <motion.div
                         className={styles.whatWeOfferItem}
                         initial={{ opacity: 0, translateY: 20 }}
@@ -118,6 +114,7 @@ const WhatWeOffer = () => {
                                 width={50}
                                 height={50}
                                 loading="lazy"
+                                className={styles.whatWeOfferVerticalItemImage}
                             />
                             <h4>Прозорість та естетика</h4>
                             <ul>
@@ -151,6 +148,6 @@ const WhatWeOffer = () => {
             </div>
         </section>
     );
-}
+};
 
 export default WhatWeOffer;

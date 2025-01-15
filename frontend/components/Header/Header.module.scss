@@ -6,10 +6,14 @@
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  position: absolute;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: 2500;
+  background-color: #fff; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   scroll-margin-top: 100px;
   margin: 0 auto;
-  z-index: 2000;
 
   .headerInner {
     display: flex;
@@ -20,7 +24,7 @@
     margin: 0 auto;
 
     .headerWrapper {
-      padding: 20px;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -45,28 +49,25 @@
             color: #222831;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            font-size: 16px; 
           }
+        }
+      }
 
-          .btnCalculator {
-            background-color: #fff;
-            color: #222831;
-            font-size: 16px;
-            padding: 15px 20px;
-            margin: 10px;
-            text-decoration: none;
-            border-radius: 2px;
-            border: none;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.25);
+      .btnCalculator {
+        background-color: #fff;
+        color: #222831;
+        font-size: 16px;
+        padding: 15px 20px;
+        margin: 10px;
+        text-decoration: none;
+        border-radius: 2px;
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.25);
 
-            &:hover {
-              scale: 0.9;
-            }
-          }
-
-          &:last-child {
-            margin-right: 0;
-          }
+        &:hover {
+          scale: 0.9;
         }
       }
 
@@ -110,21 +111,42 @@
   }
 
   .mobileNav {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
     top: 0;
     right: -400px;
-    width: 300px;
     height: 100%;
     background-color: #fff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
+    z-index: 2500;
     overflow-y: auto;
     transition: right 0.3s ease-in-out;
     padding: 20px;
 
     &.active {
       right: 0;
+    }
+
+    .mobileNavHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0;
+
+      .headerLogo {
+        width: 100px;
+      }
+
+      .closeButton {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
     }
 
     .navList {
@@ -134,7 +156,7 @@
       justify-content: center;
       gap: 20px;
       list-style: none;
-      padding: 0;
+      padding: 0 40px;
       margin: 0;
 
       a {
@@ -144,47 +166,150 @@
         transition: color 0.3s ease;
       }
     }
-  }
 
+    .btnCalculator {
+      background-color: #e2ae53;
+      color: #222831;
+      font-size: 16px;
+      padding: 15px 20px;
+      margin: 20px;
+      text-decoration: none;
+      border-radius: 2px;
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.25);
 
-  @media (min-width: 601px) and (max-width: 1024px) {
-    .siteHeader {
-      .headerInner {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
+      &:hover {
+        scale: 0.9;
+      }
+    }
 
-        .headerWrapper {
-          padding: 10px 15px;
+    .socialMedia {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 100px;
 
-          .headerLeft {
-            .headerLogo {
-              img {
-                width: 50px;
-              }
-            }
-          }
+      .contactUsRoundedButton {
+        width: 50px;
+        height: 50px;
+        background-color: #e2ae53;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+        cursor: pointer;
 
-          .mainNav {
-            display: none;
-
-            .navList {
-              a {
-                font-size: $font-size-16-tablet;
-              }
-            }
-          }
-
-          .burgerMenu {
-            display: flex;
-            margin-left: auto;
-          }
+        svg {
+          font-size: 1.5rem;
+          stroke: #222831;
+          fill: #222831;
         }
       }
     }
   }
 
-  @media (max-width: 601px) {
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    transition: opacity 0.3s ease-in-out;
 
+    &.active {
+      display: block;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .headerInner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+
+      .headerWrapper {
+        padding: 10px 15px;
+
+        .headerLeft,
+        .mainNav,
+        .btnCalculator {
+          display: none;
+        }
+
+        .burgerMenu {
+          display: flex;
+          margin-left: auto;
+        }
+      }
+    }
+
+    .navList a {
+      font-size: 14px; 
+    }
+
+    .btnCalculator {
+      font-size: 14px; 
+    }
+
+    .socialMedia a {
+      font-size: 14px; 
+    }
+  }
+
+  @media (max-width: 600px) {
+    .headerInner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+
+      .headerWrapper {
+        padding: 10px 15px;
+
+        .headerLeft {
+          .headerLogo {
+            img {
+              width: 40px;
+            }
+          }
+        }
+
+        .mainNav {
+          display: none;
+
+          .navList {
+            a {
+              font-size: 12px;
+            }
+          }
+        }
+
+        .burgerMenu {
+          display: flex;
+          margin-left: auto;
+        }
+      }
+    }
+
+    .mobileNav {
+      display: block;
+
+      .navList a {
+        font-size: 16px; // Font-size for mobile
+      }
+
+      .btnCalculator {
+        font-size: 16px; // Font-size for mobile
+      }
+
+      .socialMedia a {
+        font-size: 16px; // Font-size for mobile
+      }
+    }
   }
 }

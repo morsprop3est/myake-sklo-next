@@ -1,20 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaArrowDown } from "react-icons/fa";
+import { motion, useViewportScroll, useTransform } from 'framer-motion';
+import { IoIosArrowDown } from "react-icons/io";
 import styles from './Main.module.scss';
 
 const Main = () => {
-    const [isShaking, setIsShaking] = useState(false);
+    const { scrollY } = useViewportScroll();
+    const arrowOpacity = useTransform(scrollY, [0, 100], [1, 0]);
+    const [isAnimating, setIsAnimating] = useState(true);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setIsShaking(true);
-            setTimeout(() => setIsShaking(false), 1000); 
-        }, 5000);
+        const timer = setTimeout(() => {
+            setIsAnimating(true);
+        }, 1000);
 
-        return () => clearInterval(interval);
+        return () => clearTimeout(timer);
     }, []);
 
     return (
@@ -82,34 +83,35 @@ const Main = () => {
                         alt="main-image"
                     />
                 </motion.div>
-            </motion.div>
-
-            <div className={styles.mainPart2}>
-                <div className={styles.container}>
-                    <div className={styles.mainPart2Wrapper}>
-                        <a href="#calculator">
+                </motion.div>
+                    <div className={styles.mainPart2}>
+                        <div className={styles.container}>
+                            <div className={styles.mainPart2Wrapper}>
+                                <a href="#calculator">
+                                    <motion.div
+                                        className={styles.mainButton}
+                                        initial={{ opacity: 0, translateY: 20 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{ duration: 1, ease: 'easeOut', delay: 2 }}
+                                    >
+                                        Хочу замовити!
+                                    </motion.div>
+                                </a>
+                            </div>
                             <motion.div
-                                className={`${styles.mainButton} ${isShaking ? styles.shake : ''}`}
-                                initial={{ opacity: 0, translateY: 20 }}
-                                animate={{ opacity: 1, translateY: 0 }}
-                                transition={{ duration: 1, ease: 'easeOut', delay: 2 }}
+                                className={styles.mainArrow}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 4, duration: 1 }}
+                                style={{ opacity: arrowOpacity }}
                             >
-                                Хочу замовити!
-                            </motion.div>
-                        </a>
-                    </div>
-                    <motion.div
-                        className={styles.mainArrow}
-                        initial={{ opacity: 0, y: 0 }} 
-                        animate={{ opacity: 1, y: [0, 20, 0] }}
-                        transition={{
-                            opacity: { delay: 2, duration: 1 }, 
-                            y: { delay: 1, duration: 1.5, repeat: Infinity, ease: "easeInOut" } 
-                        }}
-                    >
-                        <FaArrowDown style={{ fontSize: '2rem', color: '#7360f2' }} />
+                                <motion.div
+                                    animate={{ y: [0, 20, 0] }}
+                                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                                >
+                            <IoIosArrowDown  style={{ fontSize: '2rem', color: '#7360f2' }} />
+                        </motion.div>
                     </motion.div>
-
                 </div>
             </div>
         </section>

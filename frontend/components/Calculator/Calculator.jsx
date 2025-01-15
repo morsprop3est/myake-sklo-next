@@ -43,6 +43,7 @@ const Calculator = () => {
     return (
         <motion.section
             className={styles.calculator}
+            id="#calculator"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}

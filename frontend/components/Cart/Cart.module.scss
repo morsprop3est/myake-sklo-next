@@ -5,19 +5,23 @@
 .cartLogo {
   display: flex;
   width: 40px;
-  background-color: #e2ae53;
   height: 40px;
+  background-color: #fff;
   padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.25);
+  align-items: center;
+  justify-content: center;
 
-  img {
+  .cartIcon {
     width: 100%;
+    height: 100%;
+    color: #222831;
   }
 }
 
 .cartButton {
-  background-color: transparent;
+  background-color: transparent;  
   color: white;
   padding: 10px 20px;
   border: none;
@@ -25,25 +29,47 @@
   cursor: pointer;
   position: fixed;
   z-index: 2000;
-  top: 20px;
+  top: 100px;
   right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.shake {
+    animation: shake 1s;
+  }
 
   .cartCount {
+    font-family: 'Montserrat Alternates', sans-serif;
     position: absolute;
-    top: 70px;
-    right: 80px;
+    bottom: -10px;
+    left: -10px;
     background-color: red;
     color: white;
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    font-size: 14px;
-    font-weight: 600;
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
   }
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(5deg) scale(1.1); }
+  50% { transform: rotate(0deg) scale(1); }
+  75% { transform: rotate(-5deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1); }
 }
 
 .overlay {
@@ -52,7 +78,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
   z-index: 10000;
   width: 100%;
   height: 100%;
@@ -79,7 +105,6 @@
     padding: 15px 20px;
     margin: 10px auto 0 auto;
     background-color: #e2ae53;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;

@@ -69,32 +69,51 @@
 }
 
 
+
 @media (min-width: 601px) and (max-width: 1024px) {
   .whyUs {
-    padding: 100px 0;
-
-    .whyUsHeader {
-      font-size: $font-size-32-tablet;
-    }
-
-    .whyUsWrapper {
-      padding: 0 20px;
-
-      .whyUsItemHorizontal {
-        p {
-          font-size: calc(48px + (64 - 48) * ((100vw - 601px) / (1024 - 601)));
-        }
-
-        .whyUsItemHorizontalText {
-          font-size: $font-size-16-tablet;
-        }
-
-      }
-    }
+    padding: 200px 0 80px; // Adjust padding for tablets
   }
 
+  .whyUsWrapper {
+    flex-direction: row; // Change to column layout for tablets
+  }
+
+  .whyUsHeader {
+    font-size: $font-size-32-tablet; // Font-size for tablets
+  }
+
+  .verticalLine {
+    height: 300px;
+  }
+
+  .whyUsItemHorizontal p {
+    font-size: 36px; 
+  }
+
+  .whyUsItemVertical p {
+    font-size: 32px;
+  }
 }
 
-@media (max-width: 601px) {
+@media (max-width: 600px) {
+  .whyUs {
+    padding: 150px 0 60px; // Adjust padding for mobile
+  }
 
+  .whyUsWrapper {
+    flex-direction: column; // Change to column layout for mobile
+  }
+
+  .whyUsHeader {
+    font-size: 24px; // Font-size for mobile
+  }
+
+  .verticalLine {
+    height: 300px; // Adjust height for mobile
+  }
+
+  .whyUsItemHorizontal p {
+    font-size: 36px; // Font-size for mobile
+  }
 }

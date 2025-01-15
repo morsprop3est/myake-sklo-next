@@ -3,6 +3,7 @@
 
 .fastBuy {
   .container {
+    width: auto;
     padding: 40px;
   }
 
@@ -98,7 +99,6 @@
       font-weight: 400;
       box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 
-
       &:hover {
         background-color: #c49748;
       }
@@ -107,8 +107,63 @@
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
+  .fastBuy {
+    .container {
+      padding: 0;
+
+      .fastBuyHeader {
+        padding: 50px 0;
+      }
+
+      .fastBuyWrapper {
+        flex-direction: row;
+
+        .fastBuyContainer {
+          padding: 20px;
+          width: 100px;
+          
+          h5 {
+            font-size: $font-size-20-tablet; 
+          }
+
+          h6 {
+            font-size: $font-size-16-tablet; 
+          }
+
+          ul {
+            font-size: $font-size-16-tablet;
+          }
+
+          .mainButton {
+            font-size: $font-size-16-tablet;
+            padding: 10px;
+          }
+
+          .fastBuyInputWrapper {
+            .fastBuyTableWidth,
+            .fastBuyTableHeight {
+              h6 {
+                font-size: $font-size-16-tablet;
+                font-weight: 500;
+                margin: 0;
+              }
+      
+              input {
+                margin-top: 10px;
+                padding: 10px 20px;
+                font-size: $font-size-16-tablet;
+                width: 50%;
+                border: 1px solid #ccc;
+                border-radius: 2px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-@media (max-width: 601px) {
+@media (max-width: 600px) {
 
 }
