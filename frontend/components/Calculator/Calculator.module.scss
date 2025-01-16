@@ -468,12 +468,13 @@
       flex-direction: column;
 
       .photoGridWrapper {
+        gap: 20px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 100%;
+        height: 300px;
 
         .menu {
           gap: 10px;
@@ -503,7 +504,6 @@
             }
 
             .gridDisplay {
-              display: none;
               height: 100%;
             }
           }
@@ -581,4 +581,133 @@
 
 @media (max-width: 601px) {
 
+  .calculator {
+    .warningWrapper {
+      padding: 0;
+
+      div {
+        h2 {
+          font-size: $font-size-32-tablet;
+          font-weight: 400;
+        }
+
+        p {
+          font-size: $font-size-20-tablet;
+        }
+      }
+    }
+
+    .calculatorWrapper {
+      flex-direction: column;
+
+      .photoGridWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        gap: 20px;
+
+        .menu {
+          flex-direction: row;
+          gap: 10px;
+          margin-right: 10px;
+
+          .menuBtn {
+            width: 50px;
+            height: 50px;
+
+            img {
+              width: 50px;
+              height: 50px;
+            }
+          }
+        }
+
+        .displayArea {
+          width: 100%;
+          height: 200px;
+
+          .gridDisplayWrapper {
+            height: 100%;
+
+            .tableShape{
+              transform: translate(-50%, -50%) scale(1);
+            }
+
+            .gridDisplay {
+              height: 100%;
+            }
+          }
+        }
+      }
+
+      .calculatorControl {
+        box-shadow: none;
+        padding: 0;
+
+        .calculatorItemWrapper {
+          .calculatorHeader {
+            h6 {
+              font-size: $font-size-16-tablet;
+              padding: 0;
+              margin: 5px 0;
+            }
+
+            .glossy {
+              font-size: $font-size-16-tablet;
+            }
+          }
+
+          .tableShape {
+            .tableShapeItem {
+              .shapeRadio {
+                img {
+                  width: 40px;
+                }
+              }
+            }
+          }
+
+          .tableSize {
+            .tableWidth,
+            .tableHeight,
+            .tableRadius {
+              gap: 2px;
+
+              h6 {
+                font-size: $font-size-16-tablet;
+              }
+
+              input[type="number"] {
+                padding: 5px;
+              }
+            }
+          }
+
+          p {
+            font-size: $font-size-16-tablet;
+            padding: 5px 0;
+          }
+
+          .priceWrapper {
+            .oldPrice, .newPrice {
+              margin: 5px;
+            }
+          }
+        }
+
+        .mainButton {
+          padding: 15px;
+          font-size: 16px;
+          width: 200px;
+        }
+
+        p {
+          font-size: $font-size-16-tablet;
+        }
+      }
+    }
+  }
 }

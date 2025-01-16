@@ -14,7 +14,8 @@
                 text-align: center;
                 font-size: 32px;
                 font-weight: 400;
-                padding: 50px 0;
+                padding: 100px 0;
+                margin: 0;
             }
         }
 
@@ -28,8 +29,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
             height: auto;
+            width: 100%;
             margin: 0 auto;
             cursor: pointer;
             border-radius: 5px;
@@ -106,17 +107,18 @@
         }
       
         .galleryHeader {
-          margin-bottom: 0;
-      
-          h2 {
-            font-size: $font-size-32-tablet;
-          }
+          margin: 0;
+
         }
     }
 }
 
 @media (max-width: 601px) {
     .gallery .container .galleryGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .galleryHeader {
+        padding: 0;
     }
 }

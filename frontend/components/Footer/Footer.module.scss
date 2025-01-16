@@ -16,7 +16,7 @@
 
 .svgLeft img,
 .svgRight img {
-  width: 68px;
+  display: none;
 }
 
 .container {
@@ -190,5 +190,61 @@
 }
 
 @media (max-width: 601px) {
+  .container {
+    width: 300px;
+  }
 
+  .footerWrapper {
+    align-items: center;
+    padding: 100px 0 0;
+
+    .logoWrapper {
+      width: auto;
+    }
+
+    .footerContent {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+
+      .footerLeft {
+        width: 100%;
+        p {
+          font-size: 16px;
+          text-align: center;
+        }
+      }
+
+      .footerCenter {
+        a {
+          font-size: 16px;
+        }
+      }
+
+      .footerRightWrapper {
+        align-items: center;
+        .footerRightItem {
+          align-items: center;
+          font-size: 16px;
+        }
+
+        .footerRightButtons {
+          align-items: center;
+
+          .contactUsRoundedButton {
+            width: 30px;
+            height: 30px;
+
+            svg {
+              font-size: 1rem;
+            }
+          }
+
+          .btnCalculator {
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
 }

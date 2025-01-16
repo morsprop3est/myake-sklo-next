@@ -122,32 +122,51 @@
 @media (max-width: 600px) {
   .whatWeOffer {
     .mainImage {
-      width: 200px;
+      width: 75%;
+      height: auto;
     }
 
+    .whatWeOfferItem {
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+    }
+
+    .whatWeOfferWrapper {
+      flex-direction: column;
+    }
+    
     .whatWeOfferHeader {
-      font-size: 24px; // Font-size for mobile
+      font-size: $font-size-32-tablet;
+      padding: 20px 0;
     }
 
     .whatWeOfferText {
-      font-size: 16px; // Font-size for mobile
-      padding: 0;
+      font-size: $font-size-20-tablet;
+      padding: 20px 0;
     }
 
     .whatWeOfferItemWrapper {
-      flex-direction: column; // Change to column layout for mobile
-      height: auto; // Adjust height for mobile
+      flex-direction: column;
+      height: auto;
+      gap: 20px;
+
+      .whatWeOfferItem {
+        &:nth-child(2) {
+          order: -1;
+        }
+      }
 
       .whatWeOfferVerticalItem {
-        width: 100%; // Full width for mobile
-
-        h4 {
-          font-size: 16px; // Font-size for mobile
+        width: 100%;
+        align-items: center;
+        img {
+          width: 40px;
+          height: 40px;
         }
 
-        ul {
-          font-size: 16px; // Font-size for mobile
-          padding-left: 15px;
+        h4 {
+          font-size: $font-size-20-tablet;
         }
       }
     }

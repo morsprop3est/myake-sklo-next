@@ -19,9 +19,7 @@ const MobileNav = ({ isOpen, toggleMenu }) => {
                 animate={{ right: isOpen ? '0' : '-400px' }}
                 transition={{ duration: 0.2, ease: 'easeInOut' }}
             >
-                <div className={styles.mobileNavHeader}>
-                    <img src="/images/logo.svg" alt="Logo" className={styles.headerLogo} />
-                </div>
+
                 <ul className={styles.navList}>
                     <li><a href="#home" onClick={toggleMenu}>Головна</a></li>
                     <li><a href="#about" onClick={toggleMenu}>Наші переваги</a></li>

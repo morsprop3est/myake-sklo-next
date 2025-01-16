@@ -31,10 +31,10 @@ const Gallery = () => {
     return (
         <motion.div
             className={styles.gallery}
-            initial={{ opacity: 0, y: 100 }} // Початковий стан
-            whileInView={{ opacity: 1, y: 0 }} // Стан, коли компонент у полі зору
-            viewport={{ once: true, amount: 0.2 }} // Анімація лише один раз при скролі
-            transition={{ duration: 0.8 }} // Тривалість анімації
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8 }} 
         >
             <div className={styles.container}>
                 <div className={styles.galleryHeader}>
@@ -50,9 +50,9 @@ const Gallery = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{
                                 duration: 0.5,
-                                delay: index * 0.2, // Затримка на основі індексу
+                                delay: index * 0.1, 
                             }}
-                            viewport={{ once: true }} // Анімація лише один раз при скролі
+                            viewport={{ once: true }}
                         >
                             <img src={image.url} alt={image.comment} />
                         </motion.div>

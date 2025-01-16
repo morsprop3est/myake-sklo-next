@@ -46,7 +46,7 @@ const sendOrderToKeyCRM = async (orderData) => {
 
         const formattedData = {
             source_id: 33,
-            source_uuid: 666,
+            source_uuid: 777,
             buyer_comment: orderData.comments || "",
             manager_id: 23,
             manager_comment: "Order verification",
@@ -83,7 +83,7 @@ const sendOrderToKeyCRM = async (orderData) => {
                 utm_content: orderData.utm_content || "",
             },
             products: orderData.products.map((product) => ({
-                sku: product.product_id?.toString() || "", // Assuming `product_id` maps to SKU
+                sku: product.product_id?.toString() || "", 
                 price: parseFloat(product.price) || 0,
                 quantity: product.quantity || 1,
                 unit_type: "шт",

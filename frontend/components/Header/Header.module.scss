@@ -113,7 +113,7 @@
   .mobileNav {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     position: fixed;
     top: 0;
@@ -189,7 +189,7 @@
       flex-direction: row;
       align-items: center;
       gap: 10px;
-      padding-bottom: 100px;
+      padding-top: 100px;
 
       .contactUsRoundedButton {
         width: 50px;
@@ -297,18 +297,16 @@
     }
 
     .mobileNav {
-      display: block;
-
       .navList a {
-        font-size: 16px; // Font-size for mobile
+        font-size: 16px; 
       }
 
       .btnCalculator {
-        font-size: 16px; // Font-size for mobile
+        font-size: 16px;
       }
 
       .socialMedia a {
-        font-size: 16px; // Font-size for mobile
+        font-size: 16px; 
       }
     }
   }
