@@ -95,8 +95,18 @@ const CheckoutForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await submitOrder(order);
-            router.push('/');
+            const newOrder = await submitOrder(order);
+            if (order.payment_type === "wayforpay") {
+                // Redirect to WayForPay payment page
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'https://secure.wayforpay.com/pay';
+                form.innerHTML = newOrder.wayForPayForm;
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                router.push('/');
+            }
         } catch (error) {
             console.error(error);
         }

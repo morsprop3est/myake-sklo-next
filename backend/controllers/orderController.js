@@ -1,9 +1,8 @@
 const Order = require("../models/Order");
 const PostOffice = require("../models/PostOffice");
-const { sendOrderToKeyCRM } = require("../services/keycrmServices");
+const { sendOrderToKeyCRM, updatePaymentStatusInKeyCRM } = require("../services/keycrmServices");
 const { generateWayForPayForm } = require("../services/wayforpayServices");
 const cartService = require("../services/cartServices");
-
 
 exports.createOrder = async (req, res) => {
     const { session_id, products, total_price, ...orderDetails } = req.body;
@@ -24,14 +23,34 @@ exports.createOrder = async (req, res) => {
 
         await cartService.clearCartBySessionId(session_id);
 
-        await generateWayForPayForm({ ...newOrder.toJSON(), orderId });
+        let wayForPayForm = '';
+        if (orderDetails.payment_type === 'wayforpay') {
+            wayForPayForm = generateWayForPayForm({ ...newOrder.toJSON(), orderId });
+        }
 
-        res.status(201).json(newOrder);
+        res.status(201).json({ newOrder, wayForPayForm });
     } catch (error) {
         console.error("Error creating order:", error);
         res.status(500).send("Internal Server Error");
     }
-}
+};
+
+exports.updatePaymentStatus = async (req, res) => {
+    const { orderId, paymentStatus } = req.body;
+
+    if (!orderId || !paymentStatus) {
+        return res.status(400).send("orderId and paymentStatus are required");
+    }
+
+    try {
+        // const updatedOrder = await updatePaymentStatusInKeyCRM(orderId, paymentStatus);
+        console.log('updatedOrder to KEYCRM');
+        res.status(200).json(updatedOrder);
+    } catch (error) {
+        console.error("Error updating payment status:", error);
+        res.status(500).send("Internal Server Error");
+    }
+};
 
 exports.getOrderById = async (req, res) => {
     try {

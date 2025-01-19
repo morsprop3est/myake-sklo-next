@@ -224,8 +224,30 @@
   }
 }
 
+/* Стилі для планшетів */
 @media (min-width: 601px) and (max-width: 1024px) {
+  .cartList {
+    width: 80%;
+    right: 10%;
+    top: 50px;
+  }
+
+  .cartButton {
+    top: 50px;
+    right: 10px;
+  }
 }
 
-@media (max-width: 601px) {
+/* Стилі для телефонів */
+@media (max-width: 600px) {
+  .cartList {
+    width: 90%;
+    right: 5%;
+    top: 50px;
+  }
+
+  .cartButton {
+    top: 50px;
+    right: 10px;
+  }
 }

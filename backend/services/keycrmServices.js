@@ -1,6 +1,9 @@
 const axios = require("axios");
 require('dotenv').config();
 
+const KEYCRM_API_URL = process.env.KEYCRM_API_URL;
+const KEYCRM_API_KEY = process.env.KEYCRM_API_KEY;
+
 const getProductProperties = (product) => {
     const { dimensions } = product;
     const properties = [
@@ -41,9 +44,6 @@ const getPaymentData = (orderData) => {
 
 const sendOrderToKeyCRM = async (orderData) => {
     try {
-        const apiUrl = process.env.KEYCRM_API_URL;
-        const apiToken = process.env.KEYCRM_API_KEY;
-
         const formattedData = {
             source_id: 33,
             source_uuid: orderData.orderId,
@@ -93,11 +93,11 @@ const sendOrderToKeyCRM = async (orderData) => {
             payments: [getPaymentData(orderData)],
         };
 
-        const response = await axios.post(apiUrl, formattedData, {
+        const response = await axios.post(KEYCRM_API_URL, formattedData, {
             headers: {
                 'Content-type': 'application/json',
                 'Accept': 'application/json',
-                Authorization: `Bearer ${apiToken}`,
+                Authorization: `Bearer ${KEYCRM_API_KEY}`,
             },
         });
 
@@ -106,6 +106,27 @@ const sendOrderToKeyCRM = async (orderData) => {
         console.error("Error sending order to KeyCRM:", error?.response?.data || error.message);
         throw new Error("Failed to send order to KeyCRM");
     }
-};
+}
 
-module.exports = { sendOrderToKeyCRM };
+
+const updatePaymentStatusInKeyCRM = async (orderId, paymentStatus) => {
+    try {
+        const response = await axios.put(
+            `${KEYCRM_API_URL}/orders/${orderId}/payment-status`,
+            { status: paymentStatus },
+            {
+                headers: {
+                    'Authorization': `Bearer ${KEYCRM_API_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error updating payment status in KeyCRM:", error);
+        throw error;
+    }
+};
+;
+
+module.exports = { sendOrderToKeyCRM, updatePaymentStatusInKeyCRM };
