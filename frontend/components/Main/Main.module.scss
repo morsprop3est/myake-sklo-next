@@ -85,6 +85,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      animation: shake 5s infinite;
+      
+      @keyframes shake {
+        0%, 60% {
+          transform: scale(1) rotate(0deg);
+        }
+        80% {
+          transform: scale(1.1) rotate(-2deg);
+        }
+        85% {
+          transform: scale(1.1) rotate(2deg);
+        }
+        90% {
+          transform: scale(1.1) rotate(-2deg);
+        }
+        95% {
+          transform: scale(1.1) rotate(2deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+      }
+      
+      
 
       .mainButton {
         display: inline-block;
@@ -124,14 +148,6 @@
         fill: #222831;
       }
     }
-  }
-
-  @keyframes shake {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    50% { transform: rotate(0deg); }
-    75% { transform: rotate(-5deg); }
-    100% { transform: rotate(0deg); }
   }
 
   @media (min-width: 601px) and (max-width: 1024px) {

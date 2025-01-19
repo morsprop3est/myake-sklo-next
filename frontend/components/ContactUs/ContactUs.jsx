@@ -2,15 +2,15 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { FaViber, FaTelegramPlane, FaInstagram } from 'react-icons/fa';
+import { FaViber, FaFacebook, FaInstagram } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import Button from '../Button/Button';
 import styles from './ContactUs.module.scss';
 
 const ContactUs = () => {
     return (
         <motion.section
             className={styles.contactUs}
-            id="contact-us"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -18,7 +18,7 @@ const ContactUs = () => {
         >
             <div className={styles.container}>
                 <div className={styles.contactUsWrapper}>
-                    <div className={styles.contactUsPart1}>
+                    <div className={styles.contactUsPart1} id="contact-us">
                         <div className={styles.contactUsText}>
                             <h6 className={styles.contactUsHeader}>Зворотній зв’язок</h6>
                             <p>Якщо ви зацікавлені у співпраці з нами, ми будемо раді обговорити можливості для взаємодії.</p>
@@ -36,7 +36,15 @@ const ContactUs = () => {
                                 <input type="email" id="email" name="email" placeholder="Введіть пошту" required />
                                 <label htmlFor="message">Ваше повідомлення</label>
                                 <textarea id="message" name="message" placeholder="Введіть повідомлення" required></textarea>
-                                <button type="submit" className={styles.calculatorButton}>Відправити</button>
+                                <Button 
+                                    link="#" 
+                                    text="Відправити" 
+                                    type="primary" 
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        // Додайте логіку для обробки форми тут
+                                    }} 
+                                />
                             </form>
                         </div>
                         <div className={styles.contactUsRight}>
@@ -81,15 +89,15 @@ const ContactUs = () => {
                             <div className={styles.contactUsItemExtended}>
                                 <h6>Соціальні мережі</h6>
                                 <div className={styles.contactUsRoundedButtonWrapper}>
-                                    <div className={styles.contactUsRoundedButton}>
-                                        <FaViber style={{ fontSize: '1.5rem', color: '#7360f2' }} />
-                                    </div>
-                                    <div className={styles.contactUsRoundedButton}>
-                                        <FaTelegramPlane  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
-                                    </div>
-                                    <div className={styles.contactUsRoundedButton}>
-                                        <FaInstagram  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
-                                    </div>
+                                    <a href="viber://chat?number=%2B380630407755" className={styles.contactUsRoundedButton}>
+                                        <FaViber />
+                                    </a>
+                                    <a href="https://www.facebook.com/myagkoye.steklo" className={styles.contactUsRoundedButton}>
+                                        <FaFacebook />
+                                    </a>
+                                    <a href="https://www.instagram.com/myakesklo.com.ua" className={styles.contactUsRoundedButton}>
+                                        <FaInstagram />
+                                    </a>
                                 </div>
                             </div>
                         </div>

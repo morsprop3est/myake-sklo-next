@@ -6,7 +6,7 @@ import styles from './WhyUs.module.scss';
 
 const WhyUs = () => {
     return (
-        <section className={styles.whyUs} id="advantages">
+        <section className={styles.whyUs} id="why-us">
             <div className={styles.container}>
                 <motion.div 
                     className={styles.whyUsHeader}

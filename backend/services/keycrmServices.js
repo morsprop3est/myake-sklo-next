@@ -46,7 +46,7 @@ const sendOrderToKeyCRM = async (orderData) => {
 
         const formattedData = {
             source_id: 33,
-            source_uuid: 777,
+            source_uuid: orderData.orderId,
             buyer_comment: orderData.comments || "",
             manager_id: 23,
             manager_comment: "Order verification",

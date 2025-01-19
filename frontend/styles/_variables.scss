@@ -18,3 +18,11 @@ $font-size-24-phone: calc(20px + (24 - 20) * ((100vw - 480px) / (601 - 480)));
 $font-size-20-phone: calc(16px + (20 - 16) * ((100vw - 480px) / (601 - 480)));
 $font-size-16-phone: calc(12px + (16 - 12) * ((100vw - 480px) / (601 - 480)));
 $font-size-12-phone: calc(10px + (12 - 10) * ((100vw - 480px) / (601 - 480)));
+
+
+$primary-color: #e2af53;
+$primary-color-hover: #c49748;
+$red-color: rgb(201, 0, 0);
+$background-color: #fff;
+$background-color-hover: #e4e4e4;
+$dark-color: #222831;

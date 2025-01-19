@@ -40,7 +40,7 @@ const FastBuy = () => {
     ];
 
     return (
-        <section className={styles.fastBuy}>
+        <section className={styles.fastBuy} id="fast-buy">
             <div className={styles.container}>
                 <h6 className={styles.fastBuyHeader}>
                     Швидка покупка

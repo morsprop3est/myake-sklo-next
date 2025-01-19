@@ -24,7 +24,7 @@ export const getCartBySession = async (session_id) => {
 
 export const removeFromCart = async (session_id, product_id) => {
     try {
-        const response = await axios.delete(`${API_URL}/api/carts`, {
+        const response = await axios.delete(`${API_URL}/api/carts/`, {
             data: { session_id, product_id },
         });
         return response.data;
@@ -36,7 +36,7 @@ export const removeFromCart = async (session_id, product_id) => {
 
 export const updateItemQuantity = async (session_id, product_id, quantity) => {
     try {
-        const response = await axios.put(`${API_URL}/api/carts`, { session_id, product_id, quantity });
+        const response = await axios.put(`${API_URL}/api/carts/update/${session_id}`, { product_id, quantity });
         return response.data;
     } catch (error) {
         console.error("Error updating item quantity:", error);

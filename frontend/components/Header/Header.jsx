@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import MobileNav from './MobileNav';
+import Button from '../Button/Button';
 import styles from './Header.module.scss';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
+    const [isScrolled, setIsScrolled] = useState(false);
     const { scrollY } = useScroll(); 
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -18,10 +20,18 @@ const Header = () => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
-            if (currentScrollY > lastScrollY && currentScrollY > 5) {
-                setIsVisible(false);
-            } else {
-                setIsVisible(true);
+            if (!isMenuOpen) {
+                if (currentScrollY > lastScrollY && currentScrollY > 5) {
+                    setIsVisible(false);
+                } else {
+                    setIsVisible(true);
+                }
+
+                if (currentScrollY > 400) {
+                    setIsScrolled(true);
+                } else {
+                    setIsScrolled(false);
+                }
             }
 
             setLastScrollY(currentScrollY);
@@ -31,18 +41,18 @@ const Header = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [lastScrollY]);
+    }, [lastScrollY, isMenuOpen]);
 
     return (
         <motion.header
-            className={styles.siteHeader}
+            className={`${styles.siteHeader} ${isScrolled ? styles.scrolled : ''}`}
             initial={{ opacity: 0, translateY: -100 }}
             animate={{
                 opacity: isVisible ? 1 : 0,
                 translateY: isVisible ? 0 : -100,
             }}
             transition={{
-                duration: 0.1,
+                duration: 0.3,
                 ease: 'easeInOut',
             }}
         >
@@ -51,14 +61,14 @@ const Header = () => {
                     <div className={styles.headerWrapper}>
                         <motion.div
                             className={styles.headerLeft}
-                            initial={{ opacity: 0, translateY: -200 }}
+                            initial={{ opacity: 0, translateY: -50 }}
                             animate={{ opacity: 1, translateY: 0 }}
                             transition={{
                                 duration: 1.5,
                                 type: 'spring',
                                 stiffness: 120,
                                 damping: 25,
-                                delay: 1.8,
+                                delay: 0.5,
                             }}
                         >
                             <img src="/images/logo.svg" alt="Logo" className={styles.headerLogo} />
@@ -66,26 +76,17 @@ const Header = () => {
                         <nav className={styles.mainNav}>
                             <ul className={styles.navList}>
                                 <li><a href="#home">Головна</a></li>
-                                <li><a href="#about">Наші переваги</a></li>
-                                <li><a href="#services">Про скло</a></li>
-                                <li><a href="#contact">Контакти</a></li>
+                                <li><a href="#why-us">Наші переваги</a></li>
+                                <li><a href="#what-we-offer">Про скло</a></li>
+                                <li><a href="#contact-us">Контакти</a></li>
                                 <li><a href="#reviews">Відгуки</a></li>
                             </ul>
-                            <a href="#calculator" className={styles.btnCalculator}>Калькулятор</a>
+                            <Button link="#calculator" text="Калькулятор" type="white" />
                         </nav>
                         
                         <motion.button
                             className={`${styles.burgerMenu} ${isMenuOpen ? styles.active : ''}`}
                             onClick={toggleMenu}
-                            initial={{ opacity: 0, translateY: -200 }}
-                            animate={{ opacity: 1, translateY: 0 }}
-                            transition={{
-                                duration: 1.5,
-                                type: 'spring',
-                                stiffness: 120,
-                                damping: 25,
-                                delay: 1.1,
-                            }}
                         >
                             <span className={styles.burgerLine}></span>
                             <span className={styles.burgerLine}></span>

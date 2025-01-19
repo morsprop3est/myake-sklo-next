@@ -25,7 +25,9 @@ const CartButton = ({ itemCount, onClick }) => {
             onClick={onClick}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeOut', delay: 3 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.5, ease: 'easeOut', delay: 1 }}
         >
             <div className={styles.cartLogo}>
                 <IoCartOutline className={styles.cartIcon} />

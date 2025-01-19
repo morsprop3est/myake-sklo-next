@@ -85,23 +85,9 @@
       }
     }
 
-    .mainButton {
+    .fastBuyButton {
       width: 100%;
-      padding: 20px;
-      background-color: #e2ae53;
-      color: #222831;
-      font-size: 18px;
-      border: none;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: background-color 0.3s;
-      font-family: 'Montserrat Alternates', sans-serif;
-      font-weight: 400;
-      box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
-
-      &:hover {
-        background-color: #c49748;
-      }
+      margin-top: 20px;
     }
   }
 }

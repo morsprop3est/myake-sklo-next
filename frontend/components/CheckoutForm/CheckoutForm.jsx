@@ -8,6 +8,7 @@ import styles from "./CheckoutForm.module.scss";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import useCart from '@/hooks/useCart';
+import Button from '../Button/Button';
 
 const CheckoutForm = () => {
     const { sessionId, products, loadCart } = useCart();
@@ -303,9 +304,12 @@ const CheckoutForm = () => {
                             ></textarea>
                         </label>
 
-                        <button type="submit" className={styles.submitButton}>
-                            Підтвердити замовлення
-                        </button>
+                        <Button 
+                            link="#" 
+                            text="Підтвердити замовлення" 
+                            type="primary" 
+                            onClick={handleSubmit} 
+                        />
                     </div>
                 </form>
             </div>

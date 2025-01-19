@@ -7,7 +7,7 @@ import styles from './WhatWeOffer.module.scss';
 
 const WhatWeOffer = () => {
     return (
-        <section className={styles.whatWeOffer} id="about-us">
+        <section className={styles.whatWeOffer} id="what-we-offer">
             <div className={styles.container}>
                 <motion.div
                     className={styles.whatWeOfferHeader}
@@ -62,7 +62,7 @@ const WhatWeOffer = () => {
                             initial={{ opacity: 0, translateY: 20 }}
                             whileInView={{ opacity: 1, translateY: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.6 }}
+                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
                         >
                             <Image
                                 src="/images/what-we-offer-photo2.svg"
@@ -83,7 +83,7 @@ const WhatWeOffer = () => {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
+                        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
                     >
                         <Image
                             src="/images/what-we-offer-main-photo.png"
@@ -99,14 +99,14 @@ const WhatWeOffer = () => {
                         initial={{ opacity: 0, translateY: 20 }}
                         whileInView={{ opacity: 1, translateY: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.6 }}
+                        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
                     >
                         <motion.div
                             className={styles.whatWeOfferVerticalItem}
                             initial={{ opacity: 0, translateY: 20 }}
                             whileInView={{ opacity: 1, translateY: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.8 }}
+                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.4 }}
                         >
                             <Image
                                 src="/images/what-we-offer-photo3.svg"
@@ -128,7 +128,7 @@ const WhatWeOffer = () => {
                             initial={{ opacity: 0, translateY: 20 }}
                             whileInView={{ opacity: 1, translateY: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
-                            transition={{ duration: 0.8, ease: 'easeOut', delay: 1 }}
+                            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.5 }}
                         >
                             <Image
                                 src="/images/what-we-offer-photo4.svg"

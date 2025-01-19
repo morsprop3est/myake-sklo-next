@@ -1,28 +1,44 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CartButton from './CartButton';
 import CartItem from './CartItem';
+import Button from '../Button/Button';
 import styles from './Cart.module.scss';
 import useCart from '@/hooks/useCart';
+import { getCartBySession, removeFromCart, updateItemQuantity } from '@/api/cart';
 
 const Cart = () => {
-    const { products, isLoading, addProduct, removeProduct, updateProductQuantity, loadCart } = useCart();
+    const { sessionId, products, isLoading, loadCart } = useCart();
     const [isCartVisible, setIsCartVisible] = useState(false);
 
+    useEffect(() => {
+        if (isCartVisible) {
+            loadCart();
+        }
+    }, [isCartVisible]);
+
     const toggleCartVisibility = () => {
-        if (!isCartVisible) loadCart(); 
         setIsCartVisible(!isCartVisible);
     };
 
-    const handleRemoveItem = (productId) => {
-        removeProduct(productId);
+    const handleRemoveItem = async (productId) => {
+        try {
+            await removeFromCart(sessionId, productId);
+            loadCart();
+        } catch (error) {
+            console.error("Error removing item from cart:", error);
+        }
     };
 
-    const handleUpdateQuantity = (productId, quantity) => {
-        updateProductQuantity(productId, quantity);
+    const handleUpdateQuantity = async (productId, quantity) => {
+        try {
+            await updateItemQuantity(sessionId, productId, quantity);
+            loadCart();
+        } catch (error) {
+            console.error("Error updating item quantity:", error);
+        }
     };
 
     return (
@@ -45,7 +61,7 @@ const Cart = () => {
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 50 }}
-                            transition={{ duration: 0.5, ease: 'easeOut' }}
+                            transition={{ duration: 0.3, ease: 'easeOut' }}
                         >
                             <h3>Ваші товари</h3>
                             {isLoading ? (
@@ -63,9 +79,11 @@ const Cart = () => {
                                 ))
                             )}
 
-                            <Link href="/checkout" className={styles.orderButton}>
-                                Оформити замовлення
-                            </Link>
+                            <Button 
+                                link="/checkout" 
+                                text="Оформити замовлення" 
+                                type="primary" 
+                            />
                         </motion.div>
                     </>
                 )}

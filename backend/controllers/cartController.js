@@ -63,7 +63,6 @@ exports.getCartBySession = async (req, res) => {
     }
 };
 
-
 exports.removeFromCart = async (req, res) => {
     try {
         const { session_id, product_id } = req.body;
@@ -92,19 +91,22 @@ exports.removeFromCart = async (req, res) => {
 
 exports.updateItemQuantity = async (req, res) => {
     try {
-        const { session_id, product_id, quantity } = req.body;
+        const { session_id } = req.params;
+        const { product_id, quantity } = req.body;
+
         const cart = await Cart.findOne({ where: { session_id } });
 
         if (!cart) {
             return res.status(404).json({ message: "Cart not found" });
         }
 
-        const productIndex = cart.products.findIndex((p) => p.product_id === product_id);
+        const productIndex = cart.products.findIndex(p => p.product_id === product_id);
+
         if (productIndex === -1) {
-            return res.status(404).json({ message: "Product not found in cart" });
+            return res.status(404).json({ message: "Product not found" });
         }
 
-        cart.products[productIndex].quantity = quantity;
+        cart.products[productIndex].quantity = quantity > 99 ? 99 : quantity;
 
         const sortedProducts = cart.products.map((p, index) => ({ ...p, product_id: index + 1 }));
 
@@ -112,7 +114,17 @@ exports.updateItemQuantity = async (req, res) => {
 
         cart.products = sortedProducts;
         cart.total_price = totalPrice;
-        await cart.save();
+
+        await Cart.update(
+            { 
+                products: cart.products, 
+                total_price: cart.total_price 
+            },
+            { 
+                where: { session_id }, 
+                returning: true 
+            }
+        );
 
         res.status(200).json(cart);
     } catch (error) {

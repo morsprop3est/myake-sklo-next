@@ -1,0 +1,44 @@
+@use './styles/variables' as *;
+@use './styles/container' as *;
+
+
+.button {
+    display: inline-block;
+    padding: 15px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+
+    &.primary {
+        background-color: $primary-color;
+        color: $dark-color;
+
+        &:hover {
+            background-color: $primary-color-hover;
+        }
+    }
+
+    &.secondary {
+        background-color: $dark-color;
+        color: $background-color;
+    }
+
+    &.white {
+        background-color: $background-color;
+        color: $dark-color;
+
+        &:hover {
+            background-color: $background-color-hover;
+        }
+    }
+
+    &.red {
+        background-color: $red-color;
+        color: $background-color;
+    }
+}

@@ -1,6 +1,7 @@
 const Order = require("../models/Order");
 const PostOffice = require("../models/PostOffice");
 const { sendOrderToKeyCRM } = require("../services/keycrmServices");
+const { generateWayForPayForm } = require("../services/wayforpayServices");
 const cartService = require("../services/cartServices");
 
 
@@ -19,15 +20,18 @@ exports.createOrder = async (req, res) => {
             ...orderDetails,
         });
 
-        await cartService.clearCartBySessionId(session_id);
-        await sendOrderToKeyCRM(newOrder);
+        const orderId = newOrder.id;
 
+        await cartService.clearCartBySessionId(session_id);
+
+        await generateWayForPayForm({ ...newOrder.toJSON(), orderId });
+
+        res.status(201).json(newOrder);
     } catch (error) {
         console.error("Error creating order:", error);
         res.status(500).send("Internal Server Error");
     }
-};
-
+}
 
 exports.getOrderById = async (req, res) => {
     try {

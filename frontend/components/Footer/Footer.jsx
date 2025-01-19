@@ -1,6 +1,7 @@
 import React from 'react';
-import { FaViber, FaTelegramPlane, FaInstagram, FaPhoneAlt } from 'react-icons/fa';
-import { IoMail } from 'react-icons/io5'
+import { FaViber, FaTelegramPlane, FaInstagram, FaPhoneAlt, FaFacebook } from 'react-icons/fa';
+import { IoMail } from 'react-icons/io5';
+import Button from '../Button/Button';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
@@ -29,6 +30,14 @@ const Footer = () => {
                                 <li><a href="#">Контакти</a></li>
                             </ul>
                         </div>
+                        <div className={styles.footerCenter}>
+                            <ul className={styles.navList}>
+                                <li><a href="#">Про нас</a></li>
+                                <li><a href="#">Політика конфіденційності</a></li>
+                                <li><a href="#">Публічна оферта</a></li>
+                                <li><a href="#">Обмін та повернення</a></li>
+                            </ul>
+                        </div>
                         <div className={styles.footerRight}>
                             <div className={styles.footerRightWrapper}>
                                 <div className={styles.footerRightItem}>
@@ -44,16 +53,20 @@ const Footer = () => {
                                     <p>myagkoyesteklo@gmail.com</p>
                                 </div>
                                 <div className={styles.footerRightButtons}>
-                                    <div className={styles.contactUsRoundedButton}>
+                                    <a href="viber://chat?number=%2B380630407755" className={styles.contactUsRoundedButton}>
                                         <FaViber />
-                                    </div>
-                                    <div className={styles.contactUsRoundedButton}>
-                                        <FaTelegramPlane />
-                                    </div>
-                                    <div className={styles.contactUsRoundedButton}>
+                                    </a>
+                                    <a href="https://www.facebook.com/myagkoye.steklo" className={styles.contactUsRoundedButton}>
+                                        <FaFacebook />
+                                    </a>
+                                    <a href="https://www.instagram.com/myakesklo.com.ua" className={styles.contactUsRoundedButton}>
                                         <FaInstagram />
-                                    </div>
-                                    <button className={styles.btnCalculator}>Калькулятор</button>
+                                    </a>
+                                    <Button 
+                                        link="#calculator" 
+                                        text="Калькулятор" 
+                                        type="secondary" 
+                                    />
                                 </div>
                             </div>
                         </div>

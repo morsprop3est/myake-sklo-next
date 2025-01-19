@@ -35,6 +35,7 @@
 .logoWrapper {
   display: flex;
   width: 100%;
+  padding-top: 50px;
 }
 
 .footerContent {
@@ -45,7 +46,7 @@
 
 
 .footerLeft {
-  width: 400px;
+  width: 300px;
 
   p {
     font-size: 16px;
@@ -145,6 +146,7 @@
 
     .logoWrapper {
       width: auto;
+        padding-top: 25px;
     }
 
     .footerContent {
@@ -200,6 +202,7 @@
 
     .logoWrapper {
       width: auto;
+      padding-top: 0;
     }
 
     .footerContent {

@@ -10,7 +10,7 @@ import useCart from '@/hooks/useCart';
 
 const Calculator = () => {
     const [product, setProduct] = useState({
-        quantity: 1,
+        quantity: 2,
         dimensions: {
             width: 120,
             height: 40,
@@ -43,7 +43,7 @@ const Calculator = () => {
     return (
         <motion.section
             className={styles.calculator}
-            id="#calculator"
+            id="calculator"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}

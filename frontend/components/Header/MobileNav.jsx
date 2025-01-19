@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaViber, FaTelegramPlane, FaInstagram } from 'react-icons/fa';
+import { FaViber, FaFacebook, FaInstagram } from 'react-icons/fa';
+import Button from '../Button/Button';
 import styles from './Header.module.scss';
 
 const MobileNav = ({ isOpen, toggleMenu }) => {
@@ -19,26 +20,25 @@ const MobileNav = ({ isOpen, toggleMenu }) => {
                 animate={{ right: isOpen ? '0' : '-400px' }}
                 transition={{ duration: 0.2, ease: 'easeInOut' }}
             >
-
                 <ul className={styles.navList}>
                     <li><a href="#home" onClick={toggleMenu}>Головна</a></li>
-                    <li><a href="#about" onClick={toggleMenu}>Наші переваги</a></li>
-                    <li><a href="#services" onClick={toggleMenu}>Про скло</a></li>
-                    <li><a href="#contact" onClick={toggleMenu}>Контакти</a></li>
+                    <li><a href="#why-us" onClick={toggleMenu}>Наші переваги</a></li>
+                    <li><a href="#what-we-offer" onClick={toggleMenu}>Про скло</a></li>
+                    <li><a href="#contact-us" onClick={toggleMenu}>Контакти</a></li>
                     <li><a href="#reviews" onClick={toggleMenu}>Відгуки</a></li>
-                    <li><a href="#quick-buy" onClick={toggleMenu}>Швидка покупка</a></li>
-                    <a href="#calculator" className={styles.btnCalculator} onClick={toggleMenu}>Калькулятор</a>
+                    <li><a href="#fast-buy" onClick={toggleMenu}>Швидка покупка</a></li>
+                    <Button link="#calculator" text="Калькулятор" type="primary" onClick={toggleMenu} />
                 </ul>
                 <div className={styles.socialMedia}>
-                    <div className={styles.contactUsRoundedButton}>
-                        <FaViber style={{ fontSize: '1.5rem', color: '#7360f2' }} />
-                    </div>
-                    <div className={styles.contactUsRoundedButton}>
-                        <FaTelegramPlane  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
-                    </div>
-                    <div className={styles.contactUsRoundedButton}>
-                        <FaInstagram  style={{ fontSize: '1.5rem', color: '#7360f2' }} />
-                    </div>
+                    <a href="viber://chat?number=%2B380630407755" className={styles.contactUsRoundedButton}>
+                        <FaViber />
+                    </a>
+                    <a href="https://www.facebook.com/myagkoye.steklo" className={styles.contactUsRoundedButton}>
+                        <FaFacebook />
+                    </a>
+                    <a href="https://www.instagram.com/myakesklo.com.ua" className={styles.contactUsRoundedButton}>
+                        <FaInstagram />
+                    </a>
                 </div>
             </motion.nav>
         </>
