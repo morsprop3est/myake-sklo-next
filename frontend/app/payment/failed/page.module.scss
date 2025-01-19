@@ -1,0 +1,51 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  grid-row-start: 2;
+}
+
+.failed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  height: 100vh;
+  text-align: center;
+  background-color: #f8f9fa;
+  color: #343a40;
+}
+
+.failed h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.failed p {
+  font-size: 20px;
+  margin: 0;
+
+}
+
+.failedLink {
+  font-size: 1rem;
+  color: #222831;
+  text-decoration: none;
+  background-color: #e2ae53;
+  padding: 15px 20px;
+  border-radius: 2px;
+  transition: background-color 0.3s, color 0.3s;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+
+  &:hover {
+      background-color: #c49748;
+  }
+}

@@ -58,21 +58,23 @@ const Header = () => {
         >
             <div className={styles.headerInner}>
                 <div className={styles.container}>
-                    <div className={styles.headerWrapper}>
-                        <motion.div
+                    <motion.div
+                        className={styles.headerWrapper}
+                        initial={{ opacity: 0, translateY: -50 }}
+                        animate={{ opacity: 1, translateY: 0 }}
+                        transition={{
+                            duration: 1.5,
+                            type: 'spring',
+                            stiffness: 120,
+                            damping: 25,
+                            delay: 1,
+                        }}
+                    >
+                        <div
                             className={styles.headerLeft}
-                            initial={{ opacity: 0, translateY: -50 }}
-                            animate={{ opacity: 1, translateY: 0 }}
-                            transition={{
-                                duration: 1.5,
-                                type: 'spring',
-                                stiffness: 120,
-                                damping: 25,
-                                delay: 0.5,
-                            }}
                         >
                             <img src="/images/logo.svg" alt="Logo" className={styles.headerLogo} />
-                        </motion.div>
+                        </div>
                         <nav className={styles.mainNav}>
                             <ul className={styles.navList}>
                                 <li><a href="#home">Головна</a></li>
@@ -92,7 +94,7 @@ const Header = () => {
                             <span className={styles.burgerLine}></span>
                             <span className={styles.burgerLine}></span>
                         </motion.button>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
             <MobileNav isOpen={isMenuOpen} toggleMenu={toggleMenu} />
